@@ -32,7 +32,7 @@ npm test
 ```
 
 ### Benchmarks
-The primary motivation for designing `sentiment` was performance. As such, `sentiment` includes a benchmark script within the test directory that compares it against the [Sentimental](https://github.com/thinkroth/Sentimental) module which provides a nearly equivalent interface and approach. Based on these benchmarks running on an older MacBook Air with Node 0.8.9, `sentiment` is about 97% faster than the alternative implementation:
+The primary motivation for designing `sentiment` was performance. As such, `sentiment` includes a benchmark script within the test directory that compares it against the [Sentimental](https://github.com/thinkroth/Sentimental) module which provides a nearly equivalent interface and approach. Based on these benchmarks running on an older MacBook Air with Node 0.8.9, `sentiment` is about 33 times faster than the alternative implementation:
 ```bash
 sentiment (v0.1.0)
 1000 operations  |  33ms
