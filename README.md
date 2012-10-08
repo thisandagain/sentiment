@@ -3,7 +3,10 @@
 
 [![Build Status](https://secure.travis-ci.org/thisandagain/sentiment.png)](http://travis-ci.org/thisandagain/sentiment)
 
-Sentiment is a Node.js module that uses the [AFINN-111](http://www2.imm.dtu.dk/pubdb/views/publication_details.php?id=6010) wordlist to perform [sentiment analysis](http://en.wikipedia.org/wiki/Sentiment_analysis) on arbitrary blocks of input text.
+Sentiment is a Node.js module that uses the [AFINN-111](http://www2.imm.dtu.dk/pubdb/views/publication_details.php?id=6010) wordlist to perform [sentiment analysis](http://en.wikipedia.org/wiki/Sentiment_analysis) on arbitrary blocks of input text. Sentiment provides serveral things:
+- A fully async interface for performing sentiment analysis
+- A build process that will make updating sentiment to future versions of the AFINN word list trivial
+- Performance (see benchmarks below)
 
 ### Installation
 ```bash
@@ -29,9 +32,9 @@ npm test
 ```
 
 ### Benchmarks
-The primary motivation for designing `sentiment` was performance. As such, `sentiment` includes a benchmark script within the test directory that compares it against the `Sentimental` module by [thinkroth](https://github.com/thinkroth). Based on these benchmarks from an older MacBook Air on Node 0.8.9, `sentiment` is about 97% faster than the alternative implementation:
+The primary motivation for designing `sentiment` was performance. As such, `sentiment` includes a benchmark script within the test directory that compares it against the [Sentimental]() module which provides a nearly equivalent interface and approach. Based on these benchmarks running on an older MacBook Air with Node 0.8.9, `sentiment` is about 97% faster than the alternative implementation:
 ```bash
-sentiment
+sentiment (v0.1.0)
 1000 operations  |  33ms
 2000 operations  |  75ms
 4000 operations  |  138ms
@@ -43,7 +46,7 @@ sentiment
 --------------------------
 --------------------------
 
-Sentimental (by thnkroth)
+Sentimental
 1000 operations  |  1189ms
 2000 operations  |  2392ms
 4000 operations  |  4760ms
