@@ -26,6 +26,14 @@ async.auto({
         target('This is so cool', callback);
     },
 
+    n2:         function (callback) {
+        target('Cats are stupid.', callback);
+    },
+
+    p2:         function (callback) {
+        target('Cats are totally amazing!', callback);
+    },
+
     bb:         function (callback) {
         var load = [
             'In America I doubt it could sustain itself without descending into identity politics and ego.',
@@ -74,7 +82,7 @@ async.auto({
         }, callback);
     },
 
-    test:   ['negative', 'positive', 'bb', 'fuzz', function (callback, obj) {
+    test:   ['negative', 'positive', 'n2', 'p2', 'bb', 'fuzz', function (callback, obj) {
         test('Component definition', function (t) {
             t.type(target, 'function', 'Component should be a function');
             t.end();
@@ -97,6 +105,9 @@ async.auto({
             t.equal(obj.positive.words.length, 1, 'Expected match length');
             t.end();
         });
+
+        console.dir(obj.n2);
+        console.dir(obj.p2);
 
         test('BB.net test', function (t) {
             t.type(obj.bb, 'object', 'Results should be an object');
