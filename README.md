@@ -5,7 +5,7 @@
 
 Sentiment is a Node.js module that uses the [AFINN-111](http://www2.imm.dtu.dk/pubdb/views/publication_details.php?id=6010) wordlist to perform [sentiment analysis](http://en.wikipedia.org/wiki/Sentiment_analysis) on arbitrary blocks of input text. Sentiment provides serveral things:
 - A fully async interface for performing sentiment analysis
-- A build process that will make updating sentiment to future versions of the AFINN word list trivial
+- A build process that makes updating sentiment to future versions of the AFINN word list trivial
 - Performance (see benchmarks below)
 
 ### Installation
