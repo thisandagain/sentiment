@@ -46,7 +46,7 @@ sentiment (v0.1.0)
 --------------------------
 --------------------------
 
-Sentimental
+Sentimental (v0.0.2)
 1000 operations  |  1189ms
 2000 operations  |  2392ms
 4000 operations  |  4760ms
