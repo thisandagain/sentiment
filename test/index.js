@@ -106,9 +106,6 @@ async.auto({
             t.end();
         });
 
-        console.dir(obj.n2);
-        console.dir(obj.p2);
-
         test('BB.net test', function (t) {
             t.type(obj.bb, 'object', 'Results should be an object');
             t.equal(obj.bb.length, 6, 'Expected score');

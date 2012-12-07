@@ -26,13 +26,26 @@ sentiment('Cats are totally amazing!', function (err, result) {
 });
 ```
 
+### Adding / overwriting words
+You can append and/or overwrite values from AFINN by simply injecting key/value pairs into a sentiment method call:
+```javascript
+var sentiment = require('sentiment');
+
+sentiment('Cats are totally amazing!', {
+    'cats': 5,
+    'amazing': 2  
+}, function (err, result) {
+    console.dir(result);    // Score: 7, Comparative: 1.75
+});
+```
+
 ### Testing
 ```bash
 npm test
 ```
 
 ### Benchmarks
-The primary motivation for designing `sentiment` was performance. As such, `sentiment` includes a benchmark script within the test directory that compares it against the [Sentimental](https://github.com/thinkroth/Sentimental) module which provides a nearly equivalent interface and approach. Based on these benchmarks running on an older MacBook Air with Node 0.8.9, `sentiment` is about 33 times faster than the alternative implementation:
+The primary motivation for designing `sentiment` was performance. As such, `sentiment` includes a benchmark script within the test directory that compares it against the [Sentimental](https://github.com/thinkroth/Sentimental) module which provides a nearly equivalent interface and approach. Based on these benchmarks, running on an older MacBook Air with Node 0.8.9, `sentiment` is about 33 times faster than the alternative implementation:
 ```bash
 sentiment (v0.1.0)
 1000 operations  |  33ms
