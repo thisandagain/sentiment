@@ -1,5 +1,5 @@
 /**
- * Test suite
+ * Naïve benchmark suite.
  *
  * @package sentiment
  * @author Andrew Sliwinski <andrew@diy.org>
@@ -11,7 +11,7 @@
 var async   = require('async'),
     test    = require('tap').test,
 
-    t1      = require(__dirname + '/../lib/index.js'),
+    t1      = require(__dirname + '/../../lib/index.js'),
     t2      = require('Sentimental');
 
 /**

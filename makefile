@@ -1,10 +1,11 @@
 build:
 	node ./build/index.js
 
-generator:
-	npm install
-	git init
-	git add -A
-	git remote add origin https://thisandagain@github.com/thisandagain/sentiment
+test:
+	./node_modules/.bin/tap test/governance/*.js
+	./node_modules/.bin/tap test/unit/*.js
 
-.PHONY: build generator
+benchmark:
+	node test/benchmark/index.js
+
+.PHONY: build test benchmark
