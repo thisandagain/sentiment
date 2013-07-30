@@ -2,7 +2,7 @@
   "author": "Andrew Sliwinski <andrewsliwinski@acm.org> (http://andrewsliwinski.com)",
   "name": "sentiment",
   "description": "AFINN-based sentiment analysis for Node.js",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "homepage": "https://github.com/thisandagain/sentiment",
   "repository": {
     "type": "git",
@@ -10,16 +10,16 @@
   },
   "main": "./lib/index.js",
   "scripts": {
-    "test": "tap ./test/*.js"
+    "test": "make test"
   },
   "dependencies": {
-    "async": "~0.1.22",
-    "lodash": "~1.0.0"
+    "async": "~0.2.9",
+    "lodash": "~1.3.1"
   },
   "devDependencies": {
-    "tap": "~0.3.1",
-    "codebux": "~0.1.2",
-    "Sentimental": "0.0.2"
+    "hint-hint": "~0.2.0",
+    "tap": "~0.4.3",
+    "Sentimental": "0.0.4"
   },
   "optionalDependencies": {},
   "engines": {
