@@ -1,7 +1,9 @@
-var test        = require('tap').test,
-    sentiment   = require(__dirname + '/../../lib/index');
+var test = require('tap').test;
+var sentiment = require('../../lib/index');
 
-test('unit', function (t) {
-    t.type(sentiment, 'function', 'module should be a function');
+test('interface', function (t) {
+    t.type(sentiment, 'function', 'module is a function');
+    t.type(sentiment('test'), 'object');
+    t.type(sentiment('test', {test: 10}), 'object');
     t.end();
 });
