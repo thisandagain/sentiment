@@ -29,7 +29,10 @@ fs.readFile(__dirname + '/AFINN.txt', function (err, data) {
         if (err) throw new Error(err);
 
         // Write out JSON
-        fs.writeFile(__dirname + '/AFINN.json', JSON.stringify(hash), function (err) {
+        fs.writeFile(
+            __dirname + '/AFINN.json', 
+            JSON.stringify(hash), 
+        function (err) {
             if (err) throw new Error(err);
             console.log('Complete.');
         });

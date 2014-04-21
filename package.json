@@ -1,5 +1,5 @@
 {
-  "author": "Andrew Sliwinski <andrewsliwinski@acm.org> (http://andrewsliwinski.com)",
+  "author": "Andrew Sliwinski <andrewsliwinski@acm.org>",
   "name": "sentiment",
   "description": "AFINN-based sentiment analysis for Node.js",
   "version": "1.0.0",
@@ -16,14 +16,13 @@
     "extend-object": "~1.0.0"
   },
   "devDependencies": {
-    "async": "~0.7.0",
+    "benchmark": "~1.0.0",
     "hint-hint": "~0.2.0",
-    "lodash": "~2.4.1",
-    "tap": "~0.4.3",
+    "jshint": "~2.5.0",
+    "tap": "~0.4.8",
     "Sentimental": "1.0.1"
   },
-  "optionalDependencies": {},
   "engines": {
-    "node": ">=0.6"
+    "node": ">=0.8"
   }
 }

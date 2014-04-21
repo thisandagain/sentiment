@@ -18,13 +18,11 @@ npm install sentiment
 ```javascript
 var sentiment = require('sentiment');
 
-sentiment('Cats are stupid.', function (err, result) {
-    console.dir(result);    // Score: -2, Comparative: -0.666
-});
+var r1 = sentiment('Cats are stupid.');
+console.dir(r1);        // Score: -2, Comparative: -0.666
 
-sentiment('Cats are totally amazing!', function (err, result) {
-    console.dir(result);    // Score: 4, Comparative: 1
-});
+var r2 = sentiment('Cats are totally amazing!');
+console.dir(r2);        // Score: 4, Comparative: 1
 ```
 
 ### Adding / overwriting words
@@ -32,41 +30,21 @@ You can append and/or overwrite values from AFINN by simply injecting key/value 
 ```javascript
 var sentiment = require('sentiment');
 
-sentiment('Cats are totally amazing!', {
+var result = sentiment('Cats are totally amazing!', {
     'cats': 5,
     'amazing': 2  
-}, function (err, result) {
-    console.dir(result);    // Score: 7, Comparative: 1.75
 });
+console.dir(result);    // Score: 7, Comparative: 1.75
 ```
 
 ---
 
 ### Benchmarks
-The primary motivation for designing `sentiment` was performance. As such, `sentiment` includes a benchmark script within the test directory that compares it against the [Sentimental](https://github.com/thinkroth/Sentimental) module which provides a nearly equivalent interface and approach. Based on these benchmarks, running on an older MacBook Air with Node 0.10.26, `sentiment` is about 1.5x - 2x as fast as alternative implementations:
+The primary motivation for designing `sentiment` was performance. As such, it includes a benchmark script within the test directory that compares it against the [Sentimental](https://github.com/thinkroth/Sentimental) module which provides a nearly equivalent interface and approach. Based on these benchmarks, running on an older MacBook Air with Node 0.10.26, `sentiment` is **more than twice as fast** as alternative implementations:
+
 ```bash
-sentiment (v0.3.0)
-1000 operations   |  29ms
-2000 operations   |  57ms
-4000 operations   |  128ms
-8000 operations   |  252ms
-16000 operations  |  540ms
-32000 operations  |  969ms
-64000 operations  |  2014ms
-128000 operations |  3854ms
-
---------------------------
---------------------------
-
-Sentimental (v1.0.1)
-1000 operations   |  75ms
-2000 operations   |  108ms
-4000 operations   |  215ms
-8000 operations   |  415ms
-16000 operations  |  715ms
-32000 operations  |  2636ms
-64000 operations  |  3126ms
-128000 operations |  6100ms
+sentiment (Latest) x 244,901 ops/sec ±0.49% (100 runs sampled)
+Sentimental (1.0.1) x 94,135 ops/sec ±0.50% (100 runs sampled)
 ```
 
 To run the benchmarks yourself, simply:
