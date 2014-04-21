@@ -18,7 +18,7 @@ var async   = require('async'),
  * Benchmark
  */
 function bench () {
-    var limit = 2000;
+    var limit = 128000;
     var a = [];
     var p = [
         'In America I doubt it could sustain itself without descending into identity politics and ego.',
