@@ -17,12 +17,11 @@
   },
   "devDependencies": {
     "benchmark": "~1.0.0",
-    "hint-hint": "~0.2.0",
     "jshint": "~2.5.0",
     "tap": "~0.4.8",
     "Sentimental": "1.0.1"
   },
   "engines": {
-    "node": ">=0.8"
+    "node": ">=0.10"
   }
 }
