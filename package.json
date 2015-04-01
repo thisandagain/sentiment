@@ -19,7 +19,8 @@
     "test": "make test"
   },
   "dependencies": {
-    "extend-object": "~1.0.0"
+    "extend-object": "~1.0.0",
+    "emoji-regex": "^5.0.0"
   },
   "devDependencies": {
     "benchmark": "~1.0.0",
