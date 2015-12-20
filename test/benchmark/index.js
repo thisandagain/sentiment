@@ -30,7 +30,7 @@ suite
         sentimental.analyze(stringShort);
     })
     .on('cycle', function (event) {
-        console.log(String(event.target));
+        process.stdout.write(String(event.target) + '\n');
     })
     .run({
         minSamples: 100,

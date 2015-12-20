@@ -20,7 +20,6 @@ fs.readFile(__dirname + '/AFINN.txt', function (err, data) {
 
     // Split lines
     var lines = data.toString().split(/\n/);
-    console.dir(lines);
     async.forEach(lines, function (obj, callback) {
         var item = obj.split(/\t/);
         hash[item[0]] = Number(item[1]);
@@ -34,7 +33,7 @@ fs.readFile(__dirname + '/AFINN.txt', function (err, data) {
             JSON.stringify(hash), 
         function (err) {
             if (err) throw new Error(err);
-            console.log('Complete.');
+            process.stdout.write('Complete.');
         });
     });
 });

@@ -3,7 +3,6 @@ var sentiment = require('../../lib/index');
 
 var dataset = 'This is so cool';
 var result = sentiment(dataset, {'cool': 100});
-console.dir(result);
 
 test('synchronous inject', function (t) {
     t.type(result, 'object');

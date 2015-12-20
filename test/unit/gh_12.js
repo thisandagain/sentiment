@@ -3,7 +3,6 @@ var sentiment = require('../../lib/index');
 
 var dataset = 'self-deluded';
 var result = sentiment(dataset);
-console.dir(result);
 
 test('synchronous positive', function (t) {
     t.type(result, 'object');

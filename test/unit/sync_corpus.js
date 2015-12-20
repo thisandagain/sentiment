@@ -4,7 +4,6 @@ var sentiment = require('../../lib/index');
 
 var dataset = corpus;
 var result = sentiment(dataset);
-console.dir(result);
 
 test('synchronous corpus', function (t) {
     t.type(result, 'object');

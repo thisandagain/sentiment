@@ -3,7 +3,6 @@ var sentiment = require('../../lib/index');
 
 var dataset = 'Hey you worthless scumbag';
 var result = sentiment(dataset);
-console.dir(result);
 
 test('synchronous negative', function (t) {
     t.type(result, 'object');

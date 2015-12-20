@@ -1,6 +1,5 @@
-# Paths
-TAP = ./node_modules/.bin/tap
-JSHINT = ./node_modules/.bin/jshint
+ESLINT=./node_modules/.bin/eslint
+TAP=./node_modules/.bin/tap
 
 # ------------------------------------------------------------------------------
 
@@ -8,19 +7,19 @@ JSHINT = ./node_modules/.bin/jshint
 build:
 	node ./build/index.js
 
-# Governance tests
-lint:
-	$(JSHINT) ./lib/*.js
-	$(JSHINT) ./build/*.js
-	$(JSHINT) ./test/**/*.js
+# ------------------------------------------------------------------------------
 
-# Unit tests
+lint:
+	$(ESLINT) ./lib/*.js
+	$(ESLINT) ./build/*.js
+	$(ESLINT) ./test/**/*.js
+
 unit:
 	$(TAP) ./test/unit/*.js
 
 # Benchmarks
 benchmark:
-	node test/benchmark/index.js
+	node ./test/benchmark/index.js
 
 # Run entire test suite
 test:
