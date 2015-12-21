@@ -2,6 +2,7 @@
 #### AFINN-based sentiment analysis for Node.js
 
 [![Build Status](https://secure.travis-ci.org/thisandagain/sentiment.png)](http://travis-ci.org/thisandagain/sentiment)
+[![Dependency Status](https://david-dm.org/thisandagain/sentiment.svg)](https://david-dm.org/thisandagain/sentiment)
 
 Sentiment is a Node.js module that uses the [AFINN-111](http://www2.imm.dtu.dk/pubdb/views/publication_details.php?id=6010) wordlist to perform [sentiment analysis](http://en.wikipedia.org/wiki/Sentiment_analysis) on arbitrary blocks of input text. Sentiment provides serveral things:
 
@@ -40,11 +41,11 @@ console.dir(result);    // Score: 7, Comparative: 1.75
 ---
 
 ### Benchmarks
-The primary motivation for designing `sentiment` was performance. As such, it includes a benchmark script within the test directory that compares it against the [Sentimental](https://github.com/thinkroth/Sentimental) module which provides a nearly equivalent interface and approach. Based on these benchmarks, running on an older MacBook Air with Node 0.10.26, `sentiment` is **more than twice as fast** as alternative implementations:
+The primary motivation for designing `sentiment` was performance. As such, it includes a benchmark script within the test directory that compares it against the [Sentimental](https://github.com/thinkroth/Sentimental) module which provides a nearly equivalent interface and approach. Based on these benchmarks, running on a MacBook Pro with Node 0.12.7, `sentiment` is **twice as fast** as alternative implementations:
 
 ```bash
-sentiment (Latest) x 244,901 ops/sec ±0.49% (100 runs sampled)
-Sentimental (1.0.1) x 94,135 ops/sec ±0.50% (100 runs sampled)
+sentiment (Latest) x 544,714 ops/sec ±0.83% (99 runs sampled)
+Sentimental (1.0.1) x 269,417 ops/sec ±1.06% (96 runs sampled)
 ```
 
 To run the benchmarks yourself, simply:
