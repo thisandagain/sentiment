@@ -17,14 +17,16 @@ lint:
 unit:
 	$(TAP) ./test/unit/*.js
 
-# Benchmarks
-benchmark:
-	node ./test/benchmark/index.js
+integration:
+	$(TAP) ./test/integration/*.js
 
-# Run entire test suite
+benchmark:
+	node ./test/benchmark/performance.js
+
 test:
 	@make lint
 	@make unit
+	@make integration
 	@make benchmark
 
 # ------------------------------------------------------------------------------
