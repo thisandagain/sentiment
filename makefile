@@ -20,15 +20,21 @@ unit:
 integration:
 	$(TAP) ./test/integration/*.js
 
-benchmark:
-	node ./test/benchmark/performance.js
-
 test:
 	@make lint
 	@make unit
 	@make integration
-	@make benchmark
 
 # ------------------------------------------------------------------------------
 
-.PHONY: build lint unit benchmark test
+coverage:
+	$(TAP) ./test/{integration,unit}/*.js --coverage --coverage-report=lcov
+
+# ------------------------------------------------------------------------------
+
+benchmark:
+	node ./test/benchmark/performance.js
+
+# ------------------------------------------------------------------------------
+
+.PHONY: build lint unit test coverage benchmark
