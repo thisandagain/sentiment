@@ -14,16 +14,9 @@ lint:
 	$(ESLINT) ./build/*.js
 	$(ESLINT) ./test/**/*.js
 
-unit:
-	$(TAP) ./test/unit/*.js
-
-integration:
-	$(TAP) ./test/integration/*.js
-
 test:
 	@make lint
-	@make unit
-	@make integration
+	$(TAP) ./test/{unit,integration}/*.js
 
 # ------------------------------------------------------------------------------
 
@@ -37,4 +30,4 @@ benchmark:
 
 # ------------------------------------------------------------------------------
 
-.PHONY: build lint unit test coverage benchmark
+.PHONY: build lint test coverage benchmark

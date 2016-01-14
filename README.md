@@ -2,6 +2,7 @@
 #### AFINN-based sentiment analysis for Node.js
 
 [![Build Status](https://travis-ci.org/thisandagain/sentiment.svg?branch=develop)](https://travis-ci.org/thisandagain/sentiment)
+[![Coverage Status](https://coveralls.io/repos/thisandagain/sentiment/badge.svg?branch=develop&service=github)](https://coveralls.io/github/thisandagain/sentiment?branch=develop)
 [![Dependency Status](https://david-dm.org/thisandagain/sentiment.svg)](https://david-dm.org/thisandagain/sentiment)
 [![devDependency Status](https://david-dm.org/thisandagain/sentiment/dev-status.svg)](https://david-dm.org/thisandagain/sentiment#info=devDependencies)
 
