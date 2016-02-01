@@ -19,7 +19,7 @@
     "test": "make test"
   },
   "dependencies": {
-    "lodash.assign": "4.0.0"
+    "lodash.assign": "4.0.1"
   },
   "devDependencies": {
     "Sentimental": "1.0.1",
