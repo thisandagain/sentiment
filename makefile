@@ -14,21 +14,20 @@ lint:
 	$(ESLINT) ./build/*.js
 	$(ESLINT) ./test/**/*.js
 
-unit:
-	$(TAP) ./test/unit/*.js
+test:
+	@make lint
+	$(TAP) ./test/{unit,integration}/*.js
 
-integration:
-	$(TAP) ./test/integration/*.js
+# ------------------------------------------------------------------------------
+
+coverage:
+	$(TAP) ./test/{integration,unit}/*.js --coverage --coverage-report=lcov
+
+# ------------------------------------------------------------------------------
 
 benchmark:
 	node ./test/benchmark/performance.js
 
-test:
-	@make lint
-	@make unit
-	@make integration
-	@make benchmark
-
 # ------------------------------------------------------------------------------
 
-.PHONY: build lint unit benchmark test
+.PHONY: build lint test coverage benchmark
