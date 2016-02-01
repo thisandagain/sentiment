@@ -23,7 +23,7 @@
   },
   "devDependencies": {
     "Sentimental": "1.0.1",
-    "benchmark": "~2.0.0",
+    "benchmark": "~2.1.0",
     "eslint": "~1.10.3",
     "tap": "~5.4.2"
   },
