@@ -24,7 +24,7 @@
   "devDependencies": {
     "Sentimental": "1.0.1",
     "benchmark": "^2.1.0",
-    "eslint": "^2.2.0",
+    "eslint": "^2.5.0",
     "tap": "^5.4.2"
   },
   "engines": {
