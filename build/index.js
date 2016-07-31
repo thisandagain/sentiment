@@ -22,15 +22,17 @@ fs.readFile(__dirname + '/AFINN.txt', function (err, data) {
     var lines = data.toString().split(/\n/);
     async.forEach(lines, function (obj, callback) {
         var item = obj.split(/\t/);
-        hash[item[0]] = Number(item[1]);
+        if(item[0] !== ''){
+            hash[item[0]] = Number(item[1]);
+        }
         callback();
     }, function (err) {
         if (err) throw new Error(err);
 
         // Write out JSON
         fs.writeFile(
-            __dirname + '/AFINN.json', 
-            JSON.stringify(hash), 
+            __dirname + '/AFINN.json',
+            JSON.stringify(hash),
         function (err) {
             if (err) throw new Error(err);
             process.stdout.write('Complete.');
