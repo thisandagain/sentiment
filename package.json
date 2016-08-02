@@ -25,7 +25,7 @@
     "Sentimental": "1.0.1",
     "benchmark": "^2.1.0",
     "eslint": "^2.2.0",
-    "tap": "^5.4.2"
+    "tap": "^6.3.0"
   },
   "engines": {
     "node": ">=0.10"
