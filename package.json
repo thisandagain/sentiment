@@ -19,7 +19,6 @@
     "test": "make test"
   },
   "dependencies": {
-    "emoji-regex": "^6.0.0",
     "lodash.assign": "4.1.0"
   },
   "devDependencies": {
