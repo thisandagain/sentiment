@@ -18,9 +18,7 @@
   "scripts": {
     "test": "make test"
   },
-  "dependencies": {
-    "lodash.assign": "4.1.0"
-  },
+  "dependencies": {},
   "devDependencies": {
     "Sentimental": "1.0.1",
     "benchmark": "^2.1.0",
