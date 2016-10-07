@@ -8,6 +8,6 @@ test('synchronous positive', function (t) {
     t.equal(result.score, 0);
     t.equal(result.comparative, 0);
     t.equal(result.tokens.length, 1);
-    t.equal(result.words.length, 0);
+    t.equal(result.words.length, 1);
     t.end();
 });
