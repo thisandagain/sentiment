@@ -18,7 +18,9 @@
   "scripts": {
     "test": "make test"
   },
-  "dependencies": {},
+  "dependencies": {
+    "afinn-165-multilingual": "git+https://github.com/dkocich/afinn-165-multilingual.git"
+  },
   "devDependencies": {
     "Sentimental": "1.0.1",
     "benchmark": "^2.1.0",
