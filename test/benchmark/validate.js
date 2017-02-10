@@ -1,4 +1,3 @@
-var test = require('tap').test;
 var sentiment = require('../../lib/index');
 
 var amazon = require('../../build/amazon.json');
