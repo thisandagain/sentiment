@@ -56,6 +56,18 @@ make benchmark
 
 ---
 
+### Validation
+While the accuracy provided by AFINN is quite good considering it's computational performance (see above) there is always room for improvement. Therefore the `sentiment` module is open to accepting PRs which modify or amend the AFINN dataset or implementation given that they improve accuracy and maintain similar performance characteristics. In order to establish this, we test the `sentiment` module against [three labelled datasets provided by UCI](https://archive.ics.uci.edu/ml/datasets/Sentiment+Labelled+Sentences).
+
+#### Baseline "Rand" Accuracy (AFINN Only)
+```
+Amazon:  0.70
+IMDB:    0.76
+Yelp:    0.67
+```
+
+---
+
 ### Testing
 ```bash
 npm test

@@ -27,6 +27,7 @@ coverage:
 
 benchmark:
 	node ./test/benchmark/performance.js
+	node ./test/benchmark/validate.js
 
 # ------------------------------------------------------------------------------
 
