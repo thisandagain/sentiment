@@ -3,8 +3,7 @@
 
 [![Build Status](https://travis-ci.org/thisandagain/sentiment.svg?branch=develop)](https://travis-ci.org/thisandagain/sentiment)
 [![Coverage Status](https://coveralls.io/repos/thisandagain/sentiment/badge.svg?branch=develop&service=github)](https://coveralls.io/github/thisandagain/sentiment?branch=develop)
-[![Dependency Status](https://david-dm.org/thisandagain/sentiment.svg)](https://david-dm.org/thisandagain/sentiment)
-[![devDependency Status](https://david-dm.org/thisandagain/sentiment/dev-status.svg)](https://david-dm.org/thisandagain/sentiment#info=devDependencies)
+[![Greenkeeper badge](https://badges.greenkeeper.io/thisandagain/sentiment.svg)](https://greenkeeper.io/)
 
 Sentiment is a Node.js module that uses the [AFINN-165](http://www2.imm.dtu.dk/pubdb/views/publication_details.php?id=6010) wordlist to perform [sentiment analysis](http://en.wikipedia.org/wiki/Sentiment_analysis) on arbitrary blocks of input text. Sentiment provides several things:
 
@@ -53,6 +52,25 @@ Sentimental (1.0.1) x 269,417 ops/sec ±1.06% (96 runs sampled)
 To run the benchmarks yourself, simply:
 ```bash
 make benchmark
+```
+
+---
+
+### Validation
+While the accuracy provided by AFINN is quite good considering it's computational performance (see above) there is always room for improvement. Therefore the `sentiment` module is open to accepting PRs which modify or amend the AFINN dataset or implementation given that they improve accuracy and maintain similar performance characteristics. In order to establish this, we test the `sentiment` module against [three labelled datasets provided by UCI](https://archive.ics.uci.edu/ml/datasets/Sentiment+Labelled+Sentences).
+
+#### Rand Accuracy (AFINN Only)
+```
+Amazon:  0.70
+IMDB:    0.76
+Yelp:    0.67
+```
+
+#### Rand Accuracy (AFINN + Additions)
+```
+Amazon:  0.72 (+2%)
+IMDB:    0.76 (+0%)
+Yelp:    0.70 (+3%)
 ```
 
 ---
