@@ -29,7 +29,7 @@ test('english', function (t) {
     );
     t.deepEqual(
         tokenize('That\'ll cause problems for the farmer\'s pigs'),
-        ['thatll', 'cause', 'problems', 'for', 'the', 'farmers', 'pigs']
+        ['that\'ll', 'cause', 'problems', 'for', 'the', 'farmer\'s', 'pigs']
     );
     t.end();
 });

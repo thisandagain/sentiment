@@ -16,6 +16,7 @@ lint:
 
 test:
 	@make lint
+	@make validate
 	$(TAP) ./test/{unit,integration}/*.js
 
 # ------------------------------------------------------------------------------
@@ -28,6 +29,9 @@ coverage:
 benchmark:
 	node ./test/benchmark/performance.js
 
+validate:
+	node ./test/benchmark/validate.js
+
 # ------------------------------------------------------------------------------
 
-.PHONY: build lint test coverage benchmark
+.PHONY: build lint test coverage benchmark validate
