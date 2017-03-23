@@ -96,6 +96,5 @@ async.waterfall([
         process.stderr.write('Error');
     } else {
         process.stderr.write('Complete.\n');
-        process.stderr.write(Object.keys(result).length + '\n');
     }
 });
