@@ -5,10 +5,8 @@ test('spec', function (t) {
     t.type(tokenize, 'function');
     t.type(tokenize('foo'), 'object');
     t.equal(tokenize('foo bar').length, 2);
+    t.type(tokenize(), 'object');
 
-    t.throws(function () {
-        tokenize();
-    });
     t.throws(function () {
         tokenize(123);
     });
