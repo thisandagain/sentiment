@@ -30,15 +30,19 @@ function processEmoji(hash, callback) {
                         callback();
                     } else {
                         var lineItem = line.split(',');
-                        var occurences = lineItem[2];
-                        var negativeCount = lineItem[4];
-                        var positiveCount = lineItem[6];
-                        var sentiment = Math.floor(5 * (
-                            (positiveCount / occurences) -
-                            (negativeCount / occurences)
-                        ));
-                        if (!Number.isNaN(sentiment) && 0 !== sentiment) {
-                            hash[line[0]] = sentiment;
+                        // lineItem will be 1 for last line & 9 for valid lines.
+                        if(lineItem.length === 9){
+                            var emoji = String.fromCodePoint(lineItem[1]);
+                            var occurences = lineItem[2];
+                            var negativeCount = lineItem[4];
+                            var positiveCount = lineItem[6];
+                            var sentiment = Math.floor(5 * (
+                                (positiveCount / occurences) -
+                                (negativeCount / occurences)
+                            ));
+                            if (!Number.isNaN(sentiment) && 0 !== sentiment) {
+                                hash[emoji] = sentiment;
+                            }
                         }
                         callback();
                     }
