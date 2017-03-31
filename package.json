@@ -19,9 +19,6 @@
   "scripts": {
     "test": "make test"
   },
-  "dependencies": {
-    "spliddit": "2.1.1"
-  },
   "devDependencies": {
     "async": "^2.1.5",
     "Sentimental": "1.0.1",
