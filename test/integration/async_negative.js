@@ -3,7 +3,7 @@ var sentiment = require('../../lib/index');
 
 var dataset = 'Hey you worthless scumbag';
 sentiment(dataset, function (err, result) {
-    test('asynchronous positive', function (t) {
+    test('asynchronous negative', function (t) {
         t.type(result, 'object');
         t.equal(result.score, -6);
         t.equal(result.comparative, -1.5);
