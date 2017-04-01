@@ -5,7 +5,7 @@ TAP=./node_modules/.bin/tap
 
 # Builds a JSON representation of the raw AFINN word list
 build:
-	node ./build/afinn.js
+	node ./build/build.js
 
 # ------------------------------------------------------------------------------
 
