@@ -7,9 +7,6 @@ test('spec', function (t) {
     t.equal(tokenize('foo bar').length, 2);
 
     t.throws(function () {
-        tokenize();
-    });
-    t.throws(function () {
         tokenize(123);
     });
     t.throws(function () {
