@@ -1,8 +1,8 @@
 var sentiment = require('../../lib/index');
 
-var amazon = require('../../build/amazon.json');
-var imdb = require('../../build/imdb.json');
-var yelp = require('../../build/yelp.json');
+var amazon = require('../fixtures/amazon.json');
+var imdb = require('../fixtures/imdb.json');
+var yelp = require('../fixtures/yelp.json');
 
 function validate (set) {
     // Storage object
