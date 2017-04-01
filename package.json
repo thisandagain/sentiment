@@ -19,8 +19,8 @@
   "scripts": {
     "test": "make test"
   },
-  "dependencies": {},
   "devDependencies": {
+    "async": "^2.1.5",
     "Sentimental": "1.0.1",
     "benchmark": "^2.1.0",
     "eslint": "^3.2.1",

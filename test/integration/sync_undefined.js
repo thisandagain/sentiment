@@ -3,7 +3,7 @@ var sentiment = require('../../lib/index');
 
 var result = sentiment(undefined);
 
-test('synchronous positive', function (t) {
+test('synchronous undefined', function (t) {
     t.type(result, 'object');
     t.equal(result.score, 0);
     t.equal(result.comparative, 0);
