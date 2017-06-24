@@ -23,7 +23,7 @@
     "async": "^2.1.5",
     "Sentimental": "1.0.1",
     "benchmark": "^2.1.0",
-    "eslint": "^3.2.1",
+    "eslint": "^4.1.0",
     "tap": "^10.1.0"
   },
   "engines": {
