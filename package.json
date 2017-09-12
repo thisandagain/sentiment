@@ -2,7 +2,7 @@
   "author": "Andrew Sliwinski <andrewsliwinski@acm.org>",
   "name": "sentiment",
   "description": "AFINN-based sentiment analysis for Node.js",
-  "version": "4.1.0",
+  "version": "4.1.1",
   "license": "MIT",
   "homepage": "https://github.com/thisandagain/sentiment",
   "repository": {
@@ -30,6 +30,7 @@
     "node": ">=4.0"
   },
   "dependencies": {
+    "levenshtein": "^1.0.5",
     "spellchecker": "^3.4.3"
   }
 }
