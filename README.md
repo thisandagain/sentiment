@@ -41,48 +41,10 @@ console.dir(result);    // Score: 7, Comparative: 1.75
 
 ---
 
-### Benchmarks
-A primary motivation for designing `sentiment` was performance. As such, it includes a benchmark script within the test directory that compares it against the [Sentimental](https://github.com/thinkroth/Sentimental) module which provides a nearly equivalent interface and approach. Based on these benchmarks, running on a MacBook Pro with Node v6.9.1, `sentiment` is **twice as fast** as alternative implementations:
-
-```bash
-sentiment (Latest) x 448,788 ops/sec ±1.02% (88 runs sampled)
-Sentimental (1.0.1) x 240,103 ops/sec ±5.13% (81 runs sampled)
-```
-
-To run the benchmarks yourself:
-```bash
-make benchmark
-```
-
----
-
-### Validation
-While the accuracy provided by AFINN is quite good considering it's computational performance (see above) there is always room for improvement. Therefore the `sentiment` module is open to accepting PRs which modify or amend the AFINN / Emoji datasets or implementation given that they improve accuracy and maintain similar performance characteristics. In order to establish this, we test the `sentiment` module against [three labelled datasets provided by UCI](https://archive.ics.uci.edu/ml/datasets/Sentiment+Labelled+Sentences).
-
-To run the validation tests yourself:
-```bash
-make validate
-```
-
-#### Rand Accuracy (AFINN Only)
-```
-Amazon:  0.70
-IMDB:    0.76
-Yelp:    0.67
-```
-
-#### Rand Accuracy (AFINN + Additions)
-```
-Amazon:  0.72 (+2%)
-IMDB:    0.76 (+0%)
-Yelp:    0.69 (+2%)
-```
-
----
 ### How it works
 #### AFINN 
-AFINN is a list of words rated for valence with an integer between minus five (negative) and plus five (positive). Sentiment analysis is performed by cross-checking the string tokens( words, emojis) with the AFINN list and getting their respective scores. The comparative score is simply: sum of each token / number of tokens. So for example let's take the following:
-
+AFINN is a list of words rated for valence with an integer between minus five (negative) and plus five (positive). Sentiment analysis is performed by cross-checking the string tokens(words, emojis) with the AFINN list and getting their respective scores. The comparative score is simply: ```sum of each token / number of tokens```. So for example let's take the following:
+```
 I love cats, but I am allergic to them.
 
 That string results in the following:
@@ -124,17 +86,57 @@ That string results in the following:
     
 In this case, love has a value of 3, allergic has a value of -2, and the remaining tokens are neutral with a value of 0. Because the string has 9 tokens the resulting comparative score looks like:
 (3 + -2) / 9 = 0.111111111
-
+```
+```
 This approach leaves you with a mid-point of 0 and the upper and lower bounds are constrained to positive and negative 5 respectively (the same as each token! 😸). For example, let's imagine an incredibly "positive" string with 200 tokens and where each token has an AFINN score of 5. Our resulting comparative score would look like this:
 
 (max positive score * number of tokens) / number of tokens
 (5 * 200) / 200 = 5
-
+```
 #### Tokenization
-Tokenization works by splitting the lines of input string, then removing the special characters and finally splitting it using spaces. This is used to get list of words in the string. 
-
+Tokenization works by splitting the lines of input string, then removing the special characters, and finally splitting it using spaces. This is used to get list of words in the string. 
 
 ---
+
+### Benchmarks
+A primary motivation for designing `sentiment` was performance. As such, it includes a benchmark script within the test directory that compares it against the [Sentimental](https://github.com/thinkroth/Sentimental) module which provides a nearly equivalent interface and approach. Based on these benchmarks, running on a MacBook Pro with Node v6.9.1, `sentiment` is **twice as fast** as alternative implementations:
+
+```bash
+sentiment (Latest) x 448,788 ops/sec ±1.02% (88 runs sampled)
+Sentimental (1.0.1) x 240,103 ops/sec ±5.13% (81 runs sampled)
+```
+
+To run the benchmarks yourself:
+```bash
+make benchmark
+```
+
+---
+
+### Validation
+While the accuracy provided by AFINN is quite good considering it's computational performance (see above) there is always room for improvement. Therefore the `sentiment` module is open to accepting PRs which modify or amend the AFINN / Emoji datasets or implementation given that they improve accuracy and maintain similar performance characteristics. In order to establish this, we test the `sentiment` module against [three labelled datasets provided by UCI](https://archive.ics.uci.edu/ml/datasets/Sentiment+Labelled+Sentences).
+
+To run the validation tests yourself:
+```bash
+make validate
+```
+
+#### Rand Accuracy (AFINN Only)
+```
+Amazon:  0.70
+IMDB:    0.76
+Yelp:    0.67
+```
+
+#### Rand Accuracy (AFINN + Additions)
+```
+Amazon:  0.72 (+2%)
+IMDB:    0.76 (+0%)
+Yelp:    0.69 (+2%)
+```
+
+---
+
 ### Testing
 ```bash
 npm test
