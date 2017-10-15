@@ -83,7 +83,7 @@ That string results in the following:
     * __Words__: List of words from input string that were found in AFINN list. 
     * __Positive__: List of postive words in input string that were found in AFINN list.
     * __Negative__: List of negative words in input string that were found in AFINN list.
-    
+```    
 In this case, love has a value of 3, allergic has a value of -2, and the remaining tokens are neutral with a value of 0. Because the string has 9 tokens the resulting comparative score looks like:
 (3 + -2) / 9 = 0.111111111
 ```
