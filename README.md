@@ -43,9 +43,9 @@ console.dir(result);    // Score: 7, Comparative: 1.75
 
 ### How it works
 #### AFINN 
-AFINN is a list of words rated for valence with an integer between minus five (negative) and plus five (positive). Sentiment analysis is performed by cross-checking the string tokens(words, emojis) with the AFINN list and getting their respective scores. The comparative score is simply: ```sum of each token / number of tokens```. So for example let's take the following:
-```
-I love cats, but I am allergic to them.
+AFINN is a list of words rated for valence with an integer between minus five (negative) and plus five (positive). Sentiment analysis is performed by cross-checking the string tokens(words, emojis) with the AFINN list and getting their respective scores. The comparative score is simply: `sum of each token / number of tokens`. So for example let's take the following:
+
+`I love cats, but I am allergic to them.`
 
 That string results in the following:
 ```javascript
@@ -83,16 +83,17 @@ That string results in the following:
     * __Words__: List of words from input string that were found in AFINN list. 
     * __Positive__: List of postive words in input string that were found in AFINN list.
     * __Negative__: List of negative words in input string that were found in AFINN list.
-```    
+ 
 In this case, love has a value of 3, allergic has a value of -2, and the remaining tokens are neutral with a value of 0. Because the string has 9 tokens the resulting comparative score looks like:
-(3 + -2) / 9 = 0.111111111
-```
-```
+`(3 + -2) / 9 = 0.111111111`
+
 This approach leaves you with a mid-point of 0 and the upper and lower bounds are constrained to positive and negative 5 respectively (the same as each token! 😸). For example, let's imagine an incredibly "positive" string with 200 tokens and where each token has an AFINN score of 5. Our resulting comparative score would look like this:
 
+```
 (max positive score * number of tokens) / number of tokens
 (5 * 200) / 200 = 5
 ```
+
 #### Tokenization
 Tokenization works by splitting the lines of input string, then removing the special characters, and finally splitting it using spaces. This is used to get list of words in the string. 
 
