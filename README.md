@@ -27,6 +27,19 @@ var r2 = sentiment('Cats are totally amazing!');
 console.dir(r2);        // Score: 4, Comparative: 1
 ```
 
+### Usage with multiple languages
+English language ('en') is set as a default option when no other parameter is set.
+```javascript
+var r3 = sentiment('Katzen sind dumm.', 'de');
+console.dir(r3);        // Score: -2, Comparative: -0.6666666666666666,
+
+var r4 = sentiment('El gato es estúpido.', 'es');
+console.dir(r4);        // Score: -2, Comparative: -0.5,
+
+var r5 = sentiment('Le chat est stupide.', 'fr');
+console.dir(r5);        // Score: -2, Comparative: -0.5,
+```
+
 ### Adding / overwriting words
 You can append and/or overwrite values from AFINN by simply injecting key/value pairs into a sentiment method call:
 ```javascript
@@ -42,7 +55,7 @@ console.dir(result);    // Score: 7, Comparative: 1.75
 ---
 
 ### How it works
-#### AFINN 
+#### AFINN
 AFINN is a list of words rated for valence with an integer between minus five (negative) and plus five (positive). Sentiment analysis is performed by cross-checking the string tokens(words, emojis) with the AFINN list and getting their respective scores. The comparative score is simply: `sum of each token / number of tokens`. So for example let's take the following:
 
 `I love cats, but I am allergic to them.`
@@ -80,10 +93,10 @@ That string results in the following:
     * __Score__: Score calculated by adding the sentiment values of recongnized words.
     * __Comparative__: Comparative score of the input string.
     * __Token__: All the tokens like words or emojis found in the input string.
-    * __Words__: List of words from input string that were found in AFINN list. 
+    * __Words__: List of words from input string that were found in AFINN list.
     * __Positive__: List of postive words in input string that were found in AFINN list.
     * __Negative__: List of negative words in input string that were found in AFINN list.
- 
+
 In this case, love has a value of 3, allergic has a value of -2, and the remaining tokens are neutral with a value of 0. Because the string has 9 tokens the resulting comparative score looks like:
 `(3 + -2) / 9 = 0.111111111`
 
@@ -95,7 +108,7 @@ This approach leaves you with a mid-point of 0 and the upper and lower bounds ar
 ```
 
 #### Tokenization
-Tokenization works by splitting the lines of input string, then removing the special characters, and finally splitting it using spaces. This is used to get list of words in the string. 
+Tokenization works by splitting the lines of input string, then removing the special characters, and finally splitting it using spaces. This is used to get list of words in the string.
 
 ---
 

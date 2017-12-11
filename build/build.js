@@ -3,9 +3,8 @@ var fs = require('fs');
 var path = require('path');
 
 // File paths
-var AFINN_PATH = path.resolve(__dirname, 'AFINN-en-165.txt');
 var EMOJI_PATH = path.resolve(__dirname, 'Emoji_Sentiment_Data_v1.0.csv');
-var RESULT_PATH = path.resolve(__dirname, 'build.json');
+var RESULT_PATH = path.resolve(__dirname, 'emoji.json');
 
 /**
  * Read emoji data from original format (CSV).
@@ -50,35 +49,6 @@ function processEmoji(hash, callback) {
 }
 
 /**
- * Read AFINN data from original format (TSV).
- * @param  {object}   hash     Result hash
- * @param  {Function} callback Callback
- * @return {void}
- */
-function processAFINN(hash, callback) {
-    // Read file
-    fs.readFile(AFINN_PATH, 'utf8', function (err, data) {
-        if (err) return callback(err);
-
-        // Split data by new line
-        data = data.split(/\n/);
-
-        // Iterate over dataset and add to hash
-        for (var i in data) {
-            var line = data[i].split(/\t/);
-
-            // Validate line
-            if (line[0] === '') continue;
-
-            // Add to hash
-            hash[line[0]] = Number(line[1]);
-        }
-
-        callback(null, hash);
-    });
-}
-
-/**
  * Write sentiment score hash to disk.
  * @param  {object}   hash     Result hash
  * @param  {Function} callback Callback
@@ -98,7 +68,6 @@ async.waterfall([
         cb(null, {});
     },
     processEmoji,
-    processAFINN,
     finish
 ], function(err, result) {
     if (err) throw new Error(err);
