@@ -29,15 +29,16 @@ console.dir(r2);        // Score: 4, Comparative: 1
 
 ### Usage with multiple languages
 English language ('en') is set as a default option when no other parameter is set.
+The list of supported languages can be found here: https://github.com/dkocich/afinn-165-multilingual
 ```javascript
 var r3 = sentiment('Katzen sind dumm.', 'de');
-console.dir(r3);        // Score: -2, Comparative: -0.6666666666666666,
+console.dir(r3);        // Score: -2, Comparative: -0.6666666666666666
 
 var r4 = sentiment('El gato es estúpido.', 'es');
-console.dir(r4);        // Score: -2, Comparative: -0.5,
+console.dir(r4);        // Score: -2, Comparative: -0.5
 
 var r5 = sentiment('Le chat est stupide.', 'fr');
-console.dir(r5);        // Score: -2, Comparative: -0.5,
+console.dir(r5);        // Score: -2, Comparative: -0.5
 ```
 
 ### Adding / overwriting words
