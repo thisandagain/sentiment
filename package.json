@@ -2,7 +2,7 @@
   "author": "Andrew Sliwinski <andrewsliwinski@acm.org>",
   "name": "sentiment",
   "description": "AFINN-based sentiment analysis for Node.js",
-  "version": "4.1.0",
+  "version": "4.2.0",
   "license": "MIT",
   "homepage": "https://github.com/thisandagain/sentiment",
   "repository": {
@@ -24,7 +24,7 @@
     "Sentimental": "1.0.1",
     "benchmark": "^2.1.0",
     "eslint": "^4.6.1",
-    "tap": "^10.1.0"
+    "tap": "^11.0.1"
   },
   "engines": {
     "node": ">=4.0"
