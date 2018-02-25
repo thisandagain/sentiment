@@ -9,21 +9,23 @@
     "type": "git",
     "url": "https://github.com/thisandagain/sentiment.git"
   },
-  "keywords": [
-    "sentiment",
-    "analysis",
-    "nlp",
-    "sentiment analysis"
-  ],
-  "main": "./lib/index.js",
+  "keywords": ["sentiment", "analysis", "nlp", "sentiment analysis"],
+  "main": "bundle/bundle.cjs.js",
+  "module": "bundle/bundle.es.js",
+  "browser": "bundle/bundle.umd.js",
   "scripts": {
-    "test": "make test"
+    "test": "make test",
+    "bundle": "rollup -c --no-conflict"
   },
   "devDependencies": {
-    "async": "^2.1.5",
     "Sentimental": "1.0.1",
+    "async": "^2.1.5",
     "benchmark": "^2.1.0",
     "eslint": "^4.6.1",
+    "rollup-plugin-commonjs": "^8.3.0",
+    "rollup-plugin-json": "^2.3.0",
+    "rollup-plugin-node-resolve": "^3.0.3",
+    "rollup-plugin-uglify": "^3.0.0",
     "tap": "^10.1.0"
   },
   "engines": {
