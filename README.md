@@ -132,8 +132,8 @@ Yelp:    0.67
 #### Rand Accuracy (AFINN + Additions)
 ```
 Amazon:  0.72 (+2%)
-IMDB:    0.76 (+0%)
-Yelp:    0.69 (+2%)
+IMDB:    0.77 (+1%)
+Yelp:    0.70 (+3%)
 ```
 
 ---
