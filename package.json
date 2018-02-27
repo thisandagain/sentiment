@@ -20,7 +20,7 @@
     "test": "make test"
   },
   "dependencies": {
-    "afinn-165-multilingual": "git+https://github.com/dkocich/afinn-165-multilingual.git"
+    "afinn-165-multilingual": "0.0.1"
   },
   "devDependencies": {
     "async": "^2.1.5",

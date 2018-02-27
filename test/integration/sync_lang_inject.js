@@ -1,8 +1,15 @@
 var test = require('tap').test;
 var sentiment = require('../../lib/index');
 
-var dataset = 'C\'était vraiment bien 😃';
-var result = sentiment(dataset, 'fr', { 'bien': 100 });
+var input = 'C\'était vraiment bien 😃';
+var options = {
+    language: 'fr',
+    extras: {
+        'bien': 100
+    }
+};
+
+var result = sentiment(input, options);
 
 test('synchronous inject FR', function (t) {
     t.type(result, 'object');

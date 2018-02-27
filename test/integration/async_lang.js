@@ -1,8 +1,12 @@
 var test = require('tap').test;
 var sentiment = require('../../lib/index');
 
-var dataset = 'C\'était vraiment bien 😃';
-sentiment(dataset, 'fr', function (err, result) {
+var input = 'C\'était vraiment bien 😃';
+var options = {
+    language: 'fr'
+};
+
+sentiment(input, options, function (err, result) {
     test('asynchronous positive FR text', function (t) {
         t.type(result, 'object');
         t.equal(result.score, 5);
