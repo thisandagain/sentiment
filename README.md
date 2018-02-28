@@ -1,5 +1,5 @@
-## sentiment
-#### AFINN-based sentiment analysis for Node.js
+# sentiment
+### AFINN-based sentiment analysis for Node.js
 
 [![Build Status](https://travis-ci.org/thisandagain/sentiment.svg?branch=develop)](https://travis-ci.org/thisandagain/sentiment)
 [![Coverage Status](https://coveralls.io/repos/thisandagain/sentiment/badge.svg?branch=develop&service=github)](https://coveralls.io/github/thisandagain/sentiment?branch=develop)
@@ -9,54 +9,112 @@ Sentiment is a Node.js module that uses the [AFINN-165](http://www2.imm.dtu.dk/p
 
 - Performance (see benchmarks below)
 - The ability to append and overwrite word / value pairs from the AFINN wordlist
+- The ability to easily add support for new languages
+- The ability to easily define custom strategies for negation, emphasis, etc. on a per-language basis
 - A build process that makes updating sentiment to future wordlists trivial
 
-### Installation
+## Table of contents
+
+- [Installation](#installation)
+- [Usage example](#usage-example)
+- [Adding new languages](#adding-new-languages)
+- [Adding and overwriting words](#adding-and-overwriting-words)
+- [API Reference](#api-reference)
+- [How it works](#how-it-works)
+- [Benchmarks](#benchmarks)
+- [Validation](#validation)
+- [Testing](#testing)
+
+## Installation
 ```bash
 npm install sentiment
 ```
 
-### Usage
+## Usage example
 ```javascript
 var sentiment = require('sentiment');
-
-var r1 = sentiment('Cats are stupid.');
-console.dir(r1);        // Score: -2, Comparative: -0.666
-
-var r2 = sentiment('Cats are totally amazing!');
-console.dir(r2);        // Score: 4, Comparative: 1
+var result = sentiment.analyze('Cats are stupid.');
+console.dir(result);    // Score: -2, Comparative: -0.666
 ```
 
-### Usage with multiple languages
-English language ('en') is set as a default option when no other parameter is set.
-The list of supported languages can be found here: https://github.com/dkocich/afinn-165-multilingual
+## Adding new languages
+You can add support for a new language by registering it using the `registerLanguage` method:
 ```javascript
-var r3 = sentiment('Katzen sind dumm.', 'de');
-console.dir(r3);        // Score: -2, Comparative: -0.6666666666666666
+var frLanguage = {
+  labels: { 'stupide': -2 }
+};
+sentiment.registerLanguage('fr', frLanguage);
 
-var r4 = sentiment('El gato es estúpido.', 'es');
-console.dir(r4);        // Score: -2, Comparative: -0.5
-
-var r5 = sentiment('Le chat est stupide.', 'fr');
-console.dir(r5);        // Score: -2, Comparative: -0.5
+var result = sentiment.analyze('Le chat est stupide.', { language: 'fr' });
+console.dir(result);    // Score: -2, Comparative: -0.5
 ```
 
-### Adding / overwriting words
+You can also define custom scoring strategies to handle things like negation and emphasis on a per-language basis:
+```javascript
+var frLanguage = {
+  labels: { 'stupide': -2 },
+  scoringStrategy: {
+    apply: function(tokens, cursor, tokenScore) {
+      if (cursor > 0) {
+        var prevtoken = tokens[cursor - 1];
+        if (prevtoken === 'pas') {
+          tokenScore = -tokenScore;
+        }
+      }
+      return tokenScore;
+    }
+  }
+};
+sentiment.registerLanguage('fr', frLanguage);
+
+var result = sentiment.analyze('Le chat n\'est pas stupide', { language: 'fr' });
+console.dir(result);    // Score: 2, Comparative: 0.4
+```
+
+## Adding and overwriting words
 You can append and/or overwrite values from AFINN by simply injecting key/value pairs into a sentiment method call:
 ```javascript
-var sentiment = require('sentiment');
-
-var result = sentiment('Cats are totally amazing!', {
+var options = {
+  extras: {
     'cats': 5,
-    'amazing': 2  
-});
+    'amazing': 2
+  }
+};
+var result = sentiment.analyze('Cats are totally amazing!', options);
 console.dir(result);    // Score: 7, Comparative: 1.75
 ```
 
+## API Reference
+
+#### `sentiment.analyze(phrase, [options], [callback])`
+
+| Argument | Type       | Required | Description |
+|----------|------------|----------|-------------|
+| phrase   | `string`   | `true`   | Input phrase to analyze |
+| options  | `object`   | `false`  | Options |
+| callback | `function` | `false`  | If specified, the result is returned with this callback function |
+
+
+`options` object properties:
+
+| Property | Type      | Default | Description  |
+|----------|-----------|---------|--------------|
+| language | `string`  | `'en'`  | Language to use for sentiment analysis |
+| emojis   | `boolean` | `true`  | Analyze emoji tokens |
+| extras   | `object`  | `{}`    | Set of labels and their associated values to add or overwrite |
+
+
+#### `sentiment.registerLanguage(languageCode, language)`
+
+| Argument     | Type     | Required | Description                                          |
+|--------------|----------|----------|------------------------------------------------------|
+| languageCode | `string` | `true`   | International two-digit code for the language to add |
+| language     | `object` | `true`   | Language module                                      |
+
 ---
 
-### How it works
-#### AFINN
+## How it works
+### AFINN
 AFINN is a list of words rated for valence with an integer between minus five (negative) and plus five (positive). Sentiment analysis is performed by cross-checking the string tokens(words, emojis) with the AFINN list and getting their respective scores. The comparative score is simply: `sum of each token / number of tokens`. So for example let's take the following:
 
 `I love cats, but I am allergic to them.`
@@ -108,12 +166,12 @@ This approach leaves you with a mid-point of 0 and the upper and lower bounds ar
 (5 * 200) / 200 = 5
 ```
 
-#### Tokenization
+### Tokenization
 Tokenization works by splitting the lines of input string, then removing the special characters, and finally splitting it using spaces. This is used to get list of words in the string.
 
 ---
 
-### Benchmarks
+## Benchmarks
 A primary motivation for designing `sentiment` was performance. As such, it includes a benchmark script within the test directory that compares it against the [Sentimental](https://github.com/thinkroth/Sentimental) module which provides a nearly equivalent interface and approach. Based on these benchmarks, running on a MacBook Pro with Node v6.9.1, `sentiment` is **twice as fast** as alternative implementations:
 
 ```bash
@@ -128,7 +186,7 @@ make benchmark
 
 ---
 
-### Validation
+## Validation
 While the accuracy provided by AFINN is quite good considering it's computational performance (see above) there is always room for improvement. Therefore the `sentiment` module is open to accepting PRs which modify or amend the AFINN / Emoji datasets or implementation given that they improve accuracy and maintain similar performance characteristics. In order to establish this, we test the `sentiment` module against [three labelled datasets provided by UCI](https://archive.ics.uci.edu/ml/datasets/Sentiment+Labelled+Sentences).
 
 To run the validation tests yourself:
@@ -136,23 +194,23 @@ To run the validation tests yourself:
 make validate
 ```
 
-#### Rand Accuracy (AFINN Only)
+### Rand Accuracy (AFINN Only)
 ```
 Amazon:  0.70
 IMDB:    0.76
 Yelp:    0.67
 ```
 
-#### Rand Accuracy (AFINN + Additions)
+### Rand Accuracy (AFINN + Additions)
 ```
 Amazon:  0.72 (+2%)
-IMDB:    0.76 (+0%)
-Yelp:    0.69 (+2%)
+IMDB:    0.77 (+1%)
+Yelp:    0.70 (+3%)
 ```
 
 ---
 
-### Testing
+## Testing
 ```bash
 npm test
 ```
