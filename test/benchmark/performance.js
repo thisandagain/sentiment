@@ -25,10 +25,10 @@ var stringLong = require('../fixtures/corpus');
  */
 suite
     .add('sentiment (Latest) - Short ', function () {
-        sentiment(stringShort);
+        sentiment.analyze(stringShort);
     })
     .add('sentiment (Latest) - Long  ', function () {
-        sentiment(stringLong);
+        sentiment.analyze(stringLong);
     })
     .add('Sentimental (1.0.1) - Short', function () {
         sentimental.analyze(stringShort);

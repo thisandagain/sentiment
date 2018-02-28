@@ -2,7 +2,7 @@ var test = require('tap').test;
 var sentiment = require('../../lib/index');
 
 var input = 'Hey you worthless scumbag';
-var result = sentiment(input);
+var result = sentiment.analyze(input);
 
 test('synchronous negative', function (t) {
     t.type(result, 'object');

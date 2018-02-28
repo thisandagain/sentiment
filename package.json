@@ -19,14 +19,12 @@
   "scripts": {
     "test": "make test"
   },
-  "dependencies": {
-    "afinn-165-multilingual": "0.0.1"
-  },
   "devDependencies": {
-    "async": "^2.1.5",
     "Sentimental": "1.0.1",
+    "async": "^2.1.5",
     "benchmark": "^2.1.0",
     "eslint": "^4.6.1",
+    "mock-require": "^3.0.1",
     "tap": "^10.1.0"
   },
   "engines": {

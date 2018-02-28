@@ -2,7 +2,7 @@ var test = require('tap').test;
 var sentiment = require('../../lib/index');
 
 var input = 'This is so cool 😃';
-var result = sentiment(input);
+var result = sentiment.analyze(input);
 
 test('synchronous positive with emoji', function (t) {
     t.type(result, 'object');

@@ -6,7 +6,7 @@ var options = {
     extras: { 'cool': 100 }
 };
 
-var result = sentiment(input, options);
+var result = sentiment.analyze(input, options);
 
 test('synchronous inject', function (t) {
     t.type(result, 'object');

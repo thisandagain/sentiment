@@ -3,7 +3,7 @@ var sentiment = require('../../lib/index');
 
 var input = 'Hey you worthless scumbag 😦';
 
-sentiment(input, function (err, result) {
+sentiment.analyze(input, function (err, result) {
     test('asynchronous negative text and emoji', function (t) {
         t.type(result, 'object');
         t.equal(result.score, -8);

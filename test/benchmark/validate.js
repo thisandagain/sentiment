@@ -13,7 +13,7 @@ function validate (set) {
 
     // Iterate over each word/class pair in the dataset
     for (var i in set) {
-        var score = sentiment(set[i].text).comparative;
+        var score = sentiment.analyze(set[i].text).comparative;
         if (set[i].class === 0) {
             if (score >= 0) obj.fail++;
             if (score < 0) obj.pass++;

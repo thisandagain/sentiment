@@ -6,7 +6,7 @@ var options = {
     extras: { 'cool': 100 }
 };
 
-sentiment(input, options, function (err, result) {
+sentiment.analyze(input, options, function (err, result) {
     test('asynchronous inject', function (t) {
         t.type(result, 'object');
         t.equal(result.score, 100);
