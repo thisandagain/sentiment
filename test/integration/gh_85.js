@@ -1,5 +1,6 @@
 var test = require('tap').test;
-var sentiment = require('../../lib/index');
+var Sentiment = require('../../lib/index');
+var sentiment = new Sentiment();
 
 var input = 'i\'ll be there soon';
 var result = sentiment.analyze(input);

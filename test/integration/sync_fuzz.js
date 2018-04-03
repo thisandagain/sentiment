@@ -1,6 +1,7 @@
 var test = require('tap').test;
 var fuzz = require('../fixtures/fuzz');
-var sentiment = require('../../lib/index');
+var Sentiment = require('../../lib/index');
+var sentiment = new Sentiment();
 
 var input = fuzz(1000);
 

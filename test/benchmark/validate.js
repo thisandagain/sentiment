@@ -1,4 +1,5 @@
-var sentiment = require('../../lib/index');
+var Sentiment = require('../../lib/index');
+var sentiment = new Sentiment();
 
 var amazon = require('../fixtures/amazon.json');
 var imdb = require('../fixtures/imdb.json');

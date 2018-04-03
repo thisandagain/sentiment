@@ -1,6 +1,7 @@
 var test = require('tap').test;
 var corpus = require('../fixtures/corpus');
-var sentiment = require('../../lib/index');
+var Sentiment = require('../../lib/index');
+var sentiment = new Sentiment();
 
 var dataset = corpus;
 var result = sentiment.analyze(dataset);

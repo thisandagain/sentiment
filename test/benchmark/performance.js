@@ -11,7 +11,8 @@
 var Benchmark = require('benchmark');
 var suite = new Benchmark.Suite();
 
-var sentiment = require('../../lib/index');
+var Sentiment = require('../../lib/index');
+var sentiment = new Sentiment();
 var sentimental = require('Sentimental');
 
 /**

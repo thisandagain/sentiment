@@ -32,7 +32,8 @@ npm install sentiment
 
 ## Usage example
 ```javascript
-var sentiment = require('sentiment');
+var Sentiment = require('sentiment');
+var sentiment = new Sentiment();
 var result = sentiment.analyze('Cats are stupid.');
 console.dir(result);    // Score: -2, Comparative: -0.666
 ```
@@ -86,30 +87,38 @@ console.dir(result);    // Score: 7, Comparative: 1.75
 
 ## API Reference
 
+#### `var sentiment = new Sentiment([options])`
+
+| Argument | Type       | Required | Description                                                |
+|----------|------------|----------|------------------------------------------------------------|
+| options  | `object`   | `false`  | Configuration options _(no options supported currently)_   |
+
+---
+
 #### `sentiment.analyze(phrase, [options], [callback])`
 
-| Argument | Type       | Required | Description |
-|----------|------------|----------|-------------|
+| Argument | Type       | Required | Description             |
+|----------|------------|----------|-------------------------|
 | phrase   | `string`   | `true`   | Input phrase to analyze |
-| options  | `object`   | `false`  | Options |
-| callback | `function` | `false`  | If specified, the result is returned with this callback function |
+| options  | `object`   | `false`  | Options _(see below)_   |
+| callback | `function` | `false`  | If specified, the result is returned using this callback function |
 
 
 `options` object properties:
 
-| Property | Type      | Default | Description  |
-|----------|-----------|---------|--------------|
-| language | `string`  | `'en'`  | Language to use for sentiment analysis |
-| emojis   | `boolean` | `true`  | Analyze emoji tokens |
+| Property | Type      | Default | Description                                                   |
+|----------|-----------|---------|---------------------------------------------------------------|
+| language | `string`  | `'en'`  | Language to use for sentiment analysis                        |
 | extras   | `object`  | `{}`    | Set of labels and their associated values to add or overwrite |
 
+---
 
 #### `sentiment.registerLanguage(languageCode, language)`
 
-| Argument     | Type     | Required | Description                                          |
-|--------------|----------|----------|------------------------------------------------------|
-| languageCode | `string` | `true`   | International two-digit code for the language to add |
-| language     | `object` | `true`   | Language module                                      |
+| Argument     | Type     | Required | Description                                                         |
+|--------------|----------|----------|---------------------------------------------------------------------|
+| languageCode | `string` | `true`   | International two-digit code for the language to add                |
+| language     | `object` | `true`   | Language module (see [Adding new languages](#adding-new-languages)) |
 
 ---
 
