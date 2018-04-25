@@ -1,8 +1,9 @@
 var test = require('tap').test;
-var sentiment = require('../../lib/index');
+var Sentiment = require('../../lib/index');
+var sentiment = new Sentiment();
 
-var dataset = 'Hey you worthless scumbag';
-var result = sentiment(dataset);
+var input = 'Hey you worthless scumbag';
+var result = sentiment.analyze(input);
 
 test('synchronous negative', function (t) {
     t.type(result, 'object');

@@ -1,8 +1,10 @@
 var test = require('tap').test;
-var sentiment = require('../../lib/index');
+var Sentiment = require('../../lib/index');
+var sentiment = new Sentiment();
 
-var dataset = 'This is so cool 😃';
-sentiment(dataset, function (err, result) {
+var input = 'This is so cool 😃';
+
+sentiment.analyze(input, function (err, result) {
     test('asynchronous positive text and emoji', function (t) {
         t.type(result, 'object');
         t.equal(result.score, 3);

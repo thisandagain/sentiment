@@ -1,9 +1,10 @@
 var test = require('tap').test;
 var corpus = require('../fixtures/corpus');
-var sentiment = require('../../lib/index');
+var Sentiment = require('../../lib/index');
+var sentiment = new Sentiment();
 
 var dataset = corpus;
-var result = sentiment(dataset);
+var result = sentiment.analyze(dataset);
 
 test('synchronous corpus', function (t) {
     t.type(result, 'object');
