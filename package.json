@@ -2,7 +2,7 @@
   "author": "Andrew Sliwinski <andrewsliwinski@acm.org>",
   "name": "sentiment",
   "description": "AFINN-based sentiment analysis for Node.js",
-  "version": "4.2.0",
+  "version": "5.0.0",
   "license": "MIT",
   "homepage": "https://github.com/thisandagain/sentiment",
   "repository": {
@@ -17,21 +17,14 @@
   ],
   "main": "./lib/index.js",
   "scripts": {
-    "benchmark": "node ./test/benchmark/performance.js",
     "build": "node ./build/build.js",
-    "coverage": "tap './test/{integration,unit}/*.js' --coverage --coverage-report=lcov",
-    "lint": "eslint './lib/*.js' './build/*.js' './test/**/*.js'",
-    "postinstall": "prepush install",
-    "prepublishOnly": "npm run test:all",
-    "pretest": "npm run lint",
-    "test": "tap './test/{unit,integration}/*.js'",
-    "test:all": "npm-run-all validate benchmark test",
-    "validate": "node ./test/benchmark/validate.js"
-  },
-  "prepush": {
-    "tasks": [
-      "npm run test:all"
-    ]
+    "test:lint": "eslint . --ext=js",
+    "test:unit": "tap test/unit/*.js",
+    "test:integration": "tap test/integration/*.js",
+    "test:benchmark": "node ./test/benchmark/performance.js",
+    "test:validate": "node ./test/benchmark/validate.js",
+    "test:coverage": "tap './test/{integration,unit}/*.js' --coverage --coverage-report=lcov",
+    "test": "npm run test:lint && npm run test:unit && npm run test:integration && npm run test:benchmark && npm run test:validate"
   },
   "devDependencies": {
     "Sentimental": "1.0.1",
@@ -39,11 +32,9 @@
     "benchmark": "^2.1.0",
     "eslint": "^4.6.1",
     "mock-require": "^3.0.1",
-    "npm-run-all": "^4.1.2",
-    "prepush": "^3.1.11",
     "tap": "^11.0.1"
   },
   "engines": {
-    "node": ">=4.0"
+    "node": ">=8.0"
   }
 }
