@@ -1,7 +1,9 @@
 var test = require('tap').test;
-var sentiment = require('../../lib/index');
+var Sentiment = require('../../lib/index');
+var sentiment = new Sentiment();
 
-var result = sentiment(undefined);
+var input = undefined;
+var result = sentiment.analyze(input);
 
 test('synchronous undefined', function (t) {
     t.type(result, 'object');

@@ -1,10 +1,11 @@
 var test = require('tap').test;
 var fuzz = require('../fixtures/fuzz');
-var sentiment = require('../../lib/index');
+var Sentiment = require('../../lib/index');
+var sentiment = new Sentiment();
 
-var dataset = fuzz(1000);
+var input = fuzz(1000);
 
 test('synchronous fuzz', function (t) {
-    t.type(sentiment(dataset), 'object');
+    t.type(sentiment.analyze(input), 'object');
     t.end();
 });

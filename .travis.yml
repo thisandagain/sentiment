@@ -1,8 +1,8 @@
 sudo: false
 language: node_js
 node_js:
-  - "4.0"
-  - "stable"
+  - "8"
+  - "node"
 cache:
   directories:
   - node_modules

@@ -2,7 +2,7 @@
   "author": "Andrew Sliwinski <andrewsliwinski@acm.org>",
   "name": "sentiment",
   "description": "AFINN-based sentiment analysis for Node.js",
-  "version": "4.1.5",
+  "version": "5.0.1",
   "license": "MIT",
   "homepage": "https://github.com/thisandagain/sentiment",
   "repository": {
@@ -17,17 +17,25 @@
   ],
   "main": "./lib/index.js",
   "scripts": {
-    "test": "make test"
+    "build": "node ./build/build.js",
+    "test:lint": "eslint . --ext=js",
+    "test:unit": "tap test/unit/*.js",
+    "test:integration": "tap test/integration/*.js",
+    "test:benchmark": "node ./test/benchmark/performance.js",
+    "test:validate": "node ./test/benchmark/validate.js",
+    "test:coverage": "tap './test/{integration,unit}/*.js' --coverage --coverage-report=lcov",
+    "test": "npm run test:lint && npm run test:unit && npm run test:integration && npm run test:benchmark && npm run test:validate"
   },
   "devDependencies": {
-    "async": "^2.1.5",
     "Sentimental": "1.0.1",
+    "async": "^2.1.5",
     "benchmark": "^2.1.0",
     "eslint": "^4.6.1",
-    "tap": "^10.1.0"
+    "mock-require": "^3.0.1",
+    "tap": "^12.0.1"
   },
   "engines": {
-    "node": ">=4.0"
+    "node": ">=8.0"
   },
   "dependencies": {
     "levenshtein": "^1.0.5",
