@@ -1,11 +1,11 @@
-var test = require('tap').test;
-var Sentiment = require('../../lib/index');
-var sentiment = new Sentiment();
+const test = require('tap').test;
+const Sentiment = require('../../lib/index');
+const sentiment = new Sentiment();
 
-var input = 'Hey you worthless scumbag';
-var result = sentiment.analyze(input);
+const input = 'Hey you worthless scumbag';
+const result = sentiment.analyze(input);
 
-test('synchronous negative', function (t) {
+test('synchronous negative', t => {
     t.type(result, 'object');
     t.equal(result.score, -6);
     t.equal(result.comparative, -1.5);

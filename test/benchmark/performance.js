@@ -8,36 +8,36 @@
 /**
  * Dependencies
  */
-var Benchmark = require('benchmark');
-var suite = new Benchmark.Suite();
+const Benchmark = require('benchmark');
+const suite = new Benchmark.Suite();
 
-var Sentiment = require('../../lib/index');
-var sentiment = new Sentiment();
-var sentimental = require('Sentimental');
+const Sentiment = require('../../lib/index');
+const sentiment = new Sentiment();
+const sentimental = require('Sentimental');
 
 /**
  * Test data
  */
-var stringShort = 'This cat is totally awesome';
-var stringLong = require('../fixtures/corpus');
+const stringShort = 'This cat is totally awesome';
+const stringLong = require('../fixtures/corpus');
 
 /**
  * Setup
  */
 suite
-    .add('sentiment (Latest) - Short ', function () {
+    .add('sentiment (Latest)  - Short', () => {
         sentiment.analyze(stringShort);
     })
-    .add('sentiment (Latest) - Long  ', function () {
+    .add('sentiment (Latest)  - Long ', () => {
         sentiment.analyze(stringLong);
     })
-    .add('Sentimental (1.0.1) - Short', function () {
+    .add('Sentimental (1.0.1) - Short', () => {
         sentimental.analyze(stringShort);
     })
-    .add('Sentimental (1.0.1) - Long ', function () {
+    .add('Sentimental (1.0.1) - Long ', () => {
         sentimental.analyze(stringLong);
     })
-    .on('cycle', function (event) {
+    .on('cycle', event => {
         process.stdout.write(String(event.target) + '\n');
     })
     .run({

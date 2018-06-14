@@ -1,15 +1,15 @@
-var test = require('tap').test;
-var Sentiment = require('../../lib/index');
-var sentiment = new Sentiment();
+const test = require('tap').test;
+const Sentiment = require('../../lib/index');
+const sentiment = new Sentiment();
 
-var input = 'This is so cool';
-var options = {
-    extras: { 'cool': 100 }
+const input = 'This is so cool';
+const options = {
+    extras: { cool: 100 }
 };
 
-var result = sentiment.analyze(input, options);
+const result = sentiment.analyze(input, options);
 
-test('synchronous inject', function (t) {
+test('synchronous inject', t => {
     t.type(result, 'object');
     t.equal(result.score, 100);
     t.equal(result.comparative, 25);
