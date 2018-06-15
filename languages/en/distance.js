@@ -1,5 +1,5 @@
 var lev = require('levenshtein');
-var tokenize = require('./tokenize');
+var tokenize = require('../../lib/tokenize');
 
 /**
  * Finds the closest match between a statement and a body of words using
