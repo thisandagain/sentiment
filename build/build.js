@@ -17,7 +17,7 @@ const processEmoji = async hash => {
         // Split data by new line
         const lines = data.split(/\n/);
         // Iterate over dataset and add to hash
-        for (var i in lines) {
+        for (const i in lines) {
             const line = lines[i].split(',');
             // Validate line
             if (i === '0' || i === 0 || line.length !== 9) continue;
@@ -65,7 +65,7 @@ const build = async () => {
         hash = await processEmoji(hash);
         hash = await finish(hash);
         process.stderr.write(
-            'Complete: ' + Object.keys(hash).length + ' entries.\n'
+            `Complete: ${Object.keys(hash).length} entries.\n`
         );
     } catch (e) {
         throw new Error(e);

@@ -10,7 +10,6 @@ test('module', t => {
 test('interface', t => {
     t.type(sentiment, 'object', 'instance is an object');
     t.type(sentiment.analyze, 'function', 'sentiment.analyze is a function');
-    // eslint-disable-next-line max-len
     t.type(
         sentiment.registerLanguage,
         'function',

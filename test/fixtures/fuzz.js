@@ -6,7 +6,7 @@ const createRandomWord = length => {
     let word = '';
 
     // Create word
-    for (var i = 0; i < length / 2; i++) {
+    for (let i = 0; i < length / 2; i++) {
         const randConsonant = consonants[rand(consonants.length)];
         const randVowel = vowels[rand(vowels.length)];
 
@@ -16,10 +16,12 @@ const createRandomWord = length => {
     return word;
 };
 
-module.exports = length => {
+const fuzz = length => {
     const words = [];
-    for (var i = 0; i < length; i++) {
+    for (let i = 0; i < length; i++) {
         words.push(createRandomWord(rand(20)));
     }
     return words.join(' ');
 };
+
+module.exports = fuzz;
