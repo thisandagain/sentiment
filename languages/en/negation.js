@@ -1,7 +1,7 @@
 /**
  * Spellchecking library
  */
-var spelling = require('./spelling');
+var spelling = require('../../lib/spelling');
 
 /**
  * These words "flip" the sentiment of the following word.
@@ -21,12 +21,14 @@ var labels = require('./labels.json');
  * 
  * @return {boolean} true if the current pos is being negaed, false otherwise
  */
-module.exports = function negated(tokens, pos) {
+module.exports = function negated(tokens, pos, spellCheck) {
     while (pos--) {
         if (negators[tokens[pos]]) {
             return true;
         }
-        var word = spelling.getSpellCheckedWord(tokens[pos]);
+        var word = spellCheck ?
+            spelling.getSpellCheckedWord(tokens[pos]) :
+            tokens[pos];
         if (negators[word]) {
             return true;
         } else if (labels.hasOwnProperty(word)) {
