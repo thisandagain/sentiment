@@ -38,6 +38,7 @@ console.dir(result);    // Score: -2, Comparative: -0.666
 ```
 
 ## Spell checked example
+We use [nspell](https://www.npmjs.com/package/nspell) for spell checking. Aditional languages need to provide a dictionary for nspell to use.
 ```js
 var Sentiment = require('sentiment');
 var sentiment = new Sentiment();
@@ -73,10 +74,10 @@ var frLanguage = {
       return tokenScore;
     }
   },
-  spellCheck: {
-    apply: function(labels, token) {
-      // Implement a spell checking strategy here
-      return token;
+  getDictionary: {
+    apply: function() {
+      // Load a dictionary for the language for nspell to use
+      return { aff, dic };
     }
   }
 };
@@ -124,6 +125,7 @@ console.dir(result);    // Score: 7, Comparative: 1.75
 |----------|-----------|---------|---------------------------------------------------------------|
 | language | `string`  | `'en'`  | Language to use for sentiment analysis                        |
 | extras   | `object`  | `{}`    | Set of labels and their associated values to add or overwrite |
+| spellCheck | `boolean` | `false` | Tell the library whether to spell check words or not |
 
 ---
 
