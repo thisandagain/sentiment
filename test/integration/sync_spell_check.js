@@ -2,10 +2,10 @@ var test = require('tap').test;
 var Sentiment = require('../../lib/index');
 var sentiment = new Sentiment();
 
-var input = 'I haite you';
+var input = 'I hatee you';
 var result = sentiment.analyze(input, { spellCheck: true });
 
-test('synchronous negation', function (t) {
+test('synchronous spell checking active', function (t) {
     t.type(result, 'object');
     t.equal(result.score, -3);
     t.equal(result.comparative, -1);
@@ -16,7 +16,7 @@ test('synchronous negation', function (t) {
 
 result = sentiment.analyze(input);
 
-test('synchronous negation', function (t) {
+test('synchronous spell checking inactive', function (t) {
     t.type(result, 'object');
     t.equal(result.score, 0);
     t.equal(result.comparative, 0);

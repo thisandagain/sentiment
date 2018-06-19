@@ -1,5 +1,25 @@
-var spellChecker = require ('spellchecker');
+var read = require('fs').readFileSync;
+var nspell = require('nspell');
 var distance = require('./distance');
+
+function loadDictionary() {
+    var base = require.resolve('dictionary-en-us');
+    var result = {
+        'aff': read(base.replace('.js', '.aff'), 'utf-8'),
+        'dic': read(base.replace('.js', '.dic'), 'utf-8')
+    };
+    return result;
+}
+
+var spell = null;
+
+function getSpellChecker() {
+    if (spell === null) {
+        var dictionaray = loadDictionary();
+        spell = nspell(dictionaray);
+    }
+    return spell;
+}
 
 /**
  * These two functions atempt to spell check and correct a given word, using
@@ -8,8 +28,9 @@ var distance = require('./distance');
  */
 module.exports = {
     getSpellCheckedAfinnWord: function (afinn, word) {
-        if (!afinn.hasOwnProperty(word) && spellChecker.isMisspelled(word)) {
-            var checked = spellChecker.getCorrectionsForMisspelling(word);
+        var spellChecker = getSpellChecker();
+        if (!afinn.hasOwnProperty(word) && !spellChecker.correct(word)) {
+            var checked = spellChecker.suggest(word);
             if (checked.length === 0) {
                 return word;
             } else {
@@ -23,8 +44,9 @@ module.exports = {
     },
 
     getSpellCheckedWord: function (word) {
-        if (spellChecker.isMisspelled(word)) {
-            var checked = spellChecker.getCorrectionsForMisspelling(word);
+        var spellChecker = getSpellChecker();
+        if (!spellChecker.correct(word)) {
+            var checked = spellChecker.suggest(word);
             if (checked.length === 0) {
                 return word;
             } else {
