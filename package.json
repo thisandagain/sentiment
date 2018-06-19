@@ -9,7 +9,12 @@
     "type": "git",
     "url": "https://github.com/thisandagain/sentiment.git"
   },
-  "keywords": ["sentiment", "analysis", "nlp", "sentiment analysis"],
+  "keywords": [
+    "sentiment",
+    "analysis",
+    "nlp",
+    "sentiment analysis"
+  ],
   "main": "./lib/index.js",
   "scripts": {
     "build": "node ./build/build.js",
@@ -18,10 +23,8 @@
     "test:integration": "tap test/integration/*.js",
     "test:benchmark": "node ./test/benchmark/performance.js",
     "test:validate": "node ./test/benchmark/validate.js",
-    "test:coverage":
-      "tap './test/{integration,unit}/*.js' --coverage --coverage-report=lcov",
-    "test":
-      "npm run test:lint && npm run test:unit && npm run test:integration && npm run test:benchmark && npm run test:validate"
+    "test:coverage": "tap './test/{integration,unit}/*.js' --coverage --coverage-report=lcov",
+    "test": "npm run test:lint && npm run test:unit && npm run test:integration && npm run test:benchmark && npm run test:validate"
   },
   "devDependencies": {
     "Sentimental": "1.0.1",
