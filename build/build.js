@@ -48,7 +48,7 @@ const processEmoji = async () => {
 const writeJSON = async hash => {
     const result = JSON.stringify(hash, null, 4);
     await fs.writeFileSync(RESULT_PATH, result);
-    process.stderr.write(`Complete: ${Object.keys(hash).length} entries.\n`);
+    process.stdout.write(`Complete: ${Object.keys(hash).length} entries.\n`);
 };
 
 /**
@@ -60,7 +60,7 @@ const build = async () => {
         const hash = await processEmoji();
         writeJSON(hash);
     } catch (e) {
-        console.log(e);
+        process.stderr.write(`${e.toString()}\n`);
     }
 };
 build();
