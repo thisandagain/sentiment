@@ -15,6 +15,7 @@ Sentiment is a Node.js module that uses the [AFINN-165](http://www2.imm.dtu.dk/p
 
 - [Installation](#installation)
 - [Usage example](#usage-example)
+- [Spell checked example](#spell-checked-example)
 - [Adding new languages](#adding-new-languages)
 - [Adding and overwriting words](#adding-and-overwriting-words)
 - [API Reference](#api-reference)
@@ -33,6 +34,14 @@ npm install sentiment
 var Sentiment = require('sentiment');
 var sentiment = new Sentiment();
 var result = sentiment.analyze('Cats are stupid.');
+console.dir(result);    // Score: -2, Comparative: -0.666
+```
+
+## Spell checked example
+```js
+var Sentiment = require('sentiment');
+var sentiment = new Sentiment();
+var result = sentiment.analyze('Cats are stpid.', { spellCheck: true });
 console.dir(result);    // Score: -2, Comparative: -0.666
 ```
 
@@ -62,6 +71,12 @@ var frLanguage = {
         }
       }
       return tokenScore;
+    }
+  },
+  spellCheck: {
+    apply: function(labels, token) {
+      // Implement a spell checking strategy here
+      return token;
     }
   }
 };
