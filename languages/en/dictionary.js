@@ -1,13 +1,13 @@
 var read = require('fs').readFileSync;
-var dictiaonary = null;
+var dictionary = null;
 
 module.exports = function() {
-    if (dictiaonary ===  null) {
+    if (dictionary ===  null) {
         var base = require.resolve('dictionary-en-us');
-        dictiaonary = {
+        dictionary = {
             'aff': read(base.replace('.js', '.aff'), 'utf-8'),
             'dic': read(base.replace('.js', '.dic'), 'utf-8')
         };
     }
-    return dictiaonary;
+    return dictionary;
 };
