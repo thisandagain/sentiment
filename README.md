@@ -38,7 +38,7 @@ console.dir(result);    // Score: -2, Comparative: -0.666
 ```
 
 ## Spell checked example
-We use [nspell](https://www.npmjs.com/package/nspell) for spell checking. Aditional languages need to provide a dictionary for nspell to use.
+We use [nspell](https://www.npmjs.com/package/nspell) for spell checking. Aditional languages need to provide a dictionary for `nspell` to use. Dictionaries can be found in [this repository](https://github.com/wooorm/dictionaries). But they can also be provided by different means, as long as they are presented to `nspell` in the format `{ aff, dic }` as prescribed by [hunspell](http://hunspell.github.io/). `nspell` supports many parts of Hunspell-style dictionaries. Essentially, the concept of a dictionary consists of one `affix` document, and one or more `dictionary` documents. The documents are tightly linked, so it’s not possible to use a Dutch affix with an English dictionary document.
 ```js
 var Sentiment = require('sentiment');
 var sentiment = new Sentiment();
@@ -76,8 +76,11 @@ var frLanguage = {
   },
   getDictionary: {
     apply: function() {
-      // Load a dictionary for the language for nspell to use
-      return { aff, dic };
+      // Load a dictionary for the language for `nspell` to use, as explained in the "Spell checked example", with the following structure:
+      return {
+        aff, // affix document
+        dic  // dictionary
+      };
     }
   }
 };
