@@ -36,5 +36,10 @@
   },
   "engines": {
     "node": ">=8.0"
+  },
+  "dependencies": {
+    "dictionary-en-us": "^2.0.0",
+    "levenshtein": "^1.0.5",
+    "nspell": "^2.0.1"
   }
 }

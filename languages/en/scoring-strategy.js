@@ -1,10 +1,10 @@
-var negators = require('./negators.json');
+var negated = require('./negation');
 
 module.exports = {
-    apply: function(tokens, cursor, tokenScore) {
+    apply: function(tokens, cursor, tokenScore, spellCheck) {
         if (cursor > 0) {
-            var prevtoken = tokens[cursor - 1];
-            if (negators[prevtoken]) {
+            // Check for negation
+            if (negated(tokens, cursor, spellCheck)) {
                 tokenScore = -tokenScore;
             }
         }

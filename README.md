@@ -15,6 +15,7 @@ Sentiment is a Node.js module that uses the [AFINN-165](http://www2.imm.dtu.dk/p
 
 - [Installation](#installation)
 - [Usage example](#usage-example)
+- [Spell checked example](#spell-checked-example)
 - [Adding new languages](#adding-new-languages)
 - [Adding and overwriting words](#adding-and-overwriting-words)
 - [API Reference](#api-reference)
@@ -33,6 +34,15 @@ npm install sentiment
 var Sentiment = require('sentiment');
 var sentiment = new Sentiment();
 var result = sentiment.analyze('Cats are stupid.');
+console.dir(result);    // Score: -2, Comparative: -0.666
+```
+
+## Spell checked example
+We use [nspell](https://www.npmjs.com/package/nspell) for spell checking. Aditional languages need to provide a dictionary for `nspell` to use. Dictionaries can be found in [this repository](https://github.com/wooorm/dictionaries). But they can also be provided by different means, as long as they are presented to `nspell` in the format `{ aff, dic }` as prescribed by [hunspell](http://hunspell.github.io/). `nspell` supports many parts of Hunspell-style dictionaries. Essentially, the concept of a dictionary consists of one `affix` document, and one or more `dictionary` documents. The documents are tightly linked, so it’s not possible to use a Dutch affix with an English dictionary document.
+```js
+var Sentiment = require('sentiment');
+var sentiment = new Sentiment();
+var result = sentiment.analyze('Cats are stpid.', { spellCheck: true });
 console.dir(result);    // Score: -2, Comparative: -0.666
 ```
 
@@ -62,6 +72,15 @@ var frLanguage = {
         }
       }
       return tokenScore;
+    }
+  },
+  getDictionary: {
+    apply: function() {
+      // Load a dictionary for the language for `nspell` to use, as explained in the "Spell checked example", with the following structure:
+      return {
+        aff, // affix document
+        dic  // dictionary
+      };
     }
   }
 };
@@ -109,6 +128,7 @@ console.dir(result);    // Score: 7, Comparative: 1.75
 |----------|-----------|---------|---------------------------------------------------------------|
 | language | `string`  | `'en'`  | Language to use for sentiment analysis                        |
 | extras   | `object`  | `{}`    | Set of labels and their associated values to add or overwrite |
+| spellCheck | `boolean` | `false` | Tell the library whether to spell check words or not |
 
 ---
 
