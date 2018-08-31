@@ -21,7 +21,7 @@ function processEmoji(hash, callback) {
     data = data.split(/\n/);
 
     // Iterate over dataset and add to hash
-    for (let i in data) {
+    for (var i in data) {
       let line = data[i].split(",");
 
       // Validate line
