@@ -13,39 +13,39 @@ var RESULT_PATH = path.resolve(__dirname, 'emoji.json');
  * @return {void}
  */
 function processEmoji(hash, callback) {
-  // Read file
-  fs.readFile(EMOJI_PATH, 'utf8', function(err, data) {
-    if (err) return callback(err);
+    // Read file
+    fs.readFile(EMOJI_PATH, 'utf8', function (err, data) {
+        if (err) return callback(err);
 
-    // Split data by new line
-    data = data.split(/\n/);
+        // Split data by new line
+        data = data.split(/\n/);
 
-    // Iterate over dataset and add to hash
-    for (var i in data) {
-      var line = data[i].split(',');
+        // Iterate over dataset and add to hash
+        for (var i in data) {
+            var line = data[i].split(',');
 
-      // Validate line
-      if (i == 0) continue; // Label
-      if (line.length !== 9) continue; // Invalid
+            // Validate line
+            if (i == 0) continue;               // Label
+            if (line.length !== 9) continue;    // Invalid
 
-      // Establish sentiment value
-      var emoji = String.fromCodePoint(line[1]);
-      var occurences = line[2];
-      var negCount = line[4];
-      var posCount = line[6];
-      var score = posCount / occurences - negCount / occurences;
-      var sentiment = Math.floor(5 * score);
+            // Establish sentiment value
+            var emoji = String.fromCodePoint(line[1]);
+            var occurences = line[2];
+            var negCount = line[4];
+            var posCount = line[6];
+            var score = (posCount / occurences) - (negCount / occurences);
+            var sentiment = Math.floor(5 * score);
 
-      // Validate score
-      if (Number.isNaN(sentiment)) continue;
-      if (sentiment === 0) continue;
+            // Validate score
+            if (Number.isNaN(sentiment)) continue;
+            if (sentiment === 0) continue;
 
-      // Add to hash
-      hash[emoji] = sentiment;
-    }
+            // Add to hash
+            hash[emoji] = sentiment;
+        }
 
-    callback(null, hash);
-  });
+        callback(null, hash);
+    });
 }
 
 /**
@@ -55,26 +55,25 @@ function processEmoji(hash, callback) {
  * @return {void}
  */
 function finish(hash, callback) {
-  var result = JSON.stringify(hash, null, 4);
-  fs.writeFile(RESULT_PATH, result, function(err) {
-    if (err) return callback(err);
-    callback(null, hash);
-  });
+    var result = JSON.stringify(hash, null, 4);
+    fs.writeFile(RESULT_PATH, result, function (err) {
+        if (err) return callback(err);
+        callback(null, hash);
+    });
 }
 
 // Execute build process
-async.waterfall(
-  [
-    function(cb) {
-      cb(null, {});
+async.waterfall([
+    function (cb) {
+        cb(null, {});
     },
     processEmoji,
     finish
-  ],
-  function(err, result) {
+], function(err, result) {
     if (err) throw new Error(err);
     process.stderr.write(
-      'Complete: ' + Object.keys(result).length + ' entries.\n'
+        'Complete: ' +
+        Object.keys(result).length +
+        ' entries.\n'
     );
-  }
-);
+});
