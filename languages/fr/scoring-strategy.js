@@ -1,4 +1,4 @@
-const negators = require("./negators.json");
+var negators = require("./negators.json");
 
 module.exports = {
   apply: function(tokens, cursor, tokenScore) {

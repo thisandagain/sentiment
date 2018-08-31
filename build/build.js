@@ -1,10 +1,10 @@
-const async = require("async");
-const fs = require("fs");
-const path = require("path");
+var async = require("async");
+var fs = require("fs");
+var path = require("path");
 
 // File paths
-const EMOJI_PATH = path.resolve(__dirname, "Emoji_Sentiment_Data_v1.0.csv");
-const RESULT_PATH = path.resolve(__dirname, "emoji.json");
+var EMOJI_PATH = path.resolve(__dirname, "Emoji_Sentiment_Data_v1.0.csv");
+var RESULT_PATH = path.resolve(__dirname, "emoji.json");
 
 /**
  * Read emoji data from original format (CSV).
