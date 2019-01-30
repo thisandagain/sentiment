@@ -131,6 +131,7 @@ That string results in the following:
 ```javascript
 {
     score: 1,
+    calculation: [ { allergic: -2 }, { love: 3 }],
     comparative: 0.1111111111111111,
     tokens: [
         'i',
