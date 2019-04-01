@@ -1,12 +1,12 @@
-var test = require('tap').test;
-var corpus = require('../fixtures/corpus');
-var Sentiment = require('../../lib/index');
-var sentiment = new Sentiment();
+const test = require('tap').test;
+const corpus = require('../fixtures/corpus');
+const Sentiment = require('../../lib/index');
+const sentiment = new Sentiment();
 
-var dataset = corpus;
-var result = sentiment.analyze(dataset);
+const dataset = corpus;
+const result = sentiment.analyze(dataset);
 
-test('synchronous corpus', function (t) {
+test('synchronous corpus', t => {
     t.type(result, 'object');
     t.equal(result.score, -3);
     t.equal(result.tokens.length, 1416);

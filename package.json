@@ -28,7 +28,6 @@
   },
   "devDependencies": {
     "Sentimental": "1.0.1",
-    "async": "^2.1.5",
     "benchmark": "^2.1.0",
     "eslint": "^5.0.1",
     "mock-require": "^3.0.1",
