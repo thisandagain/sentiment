@@ -28,6 +28,18 @@ test('english', function (t) {
         tokenize('That\'ll cause problems for the farmer\'s pigs'),
         ['that\'ll', 'cause', 'problems', 'for', 'the', 'farmer\'s', 'pigs']
     );
+    t.deepEqual(
+        tokenize('Evan is \'wrong,\', says the more qualified governor'),
+        ['evan', 'is', 'wrong', 'says', 'the','more', 'qualified', 'governor']
+    );
+    t.deepEqual(
+        tokenize('Dad told me I can be the \'honorary\' chef!'),
+        ['dad', 'told', 'me', 'i', 'can', 'be', 'the','honorary', 'chef']
+    );
+    t.deepEqual(
+        tokenize('\'Complacent\' and \'undervalued\' is a bad combination'),
+        ['complacent', 'and', 'undervalued', 'is', 'a', 'bad', 'combination']
+    );
     t.end();
 });
 
