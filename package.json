@@ -21,9 +21,9 @@
   "main": "./lib/src/index.js",
   "types": "",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc -p tsconfig.build.json",
     "build:emoji": "node ./build/build.js",
-    "build:types": "tsc --declaration --outdir lib --emitDeclarationOnly",
+    "build:types": "npm run build -- --declaration --outdir lib --emitDeclarationOnly",
     "documentation": "typedoc --out docs --exclude '*.json' ./src",
     "test:lint": "eslint . --ext=js",
     "test:unit": "jest -c jest.config.unit.js",

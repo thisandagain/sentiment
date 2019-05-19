@@ -64,9 +64,12 @@ export class LanguageProcessor {
      * @param {string} languageCode Two-digit code for the language to register
      * @param {Language} language The language module to register
      */
-    addLanguage(languageCode: string, language: Language) {
+    addLanguage(languageCode: string, language: Language): void {
         if (!language.labels) {
-            throw new Error('language.labels must be defined!');
+            throw new Error('language.labels must be defined.');
+        }
+        if (Object.keys(language.labels).length === 0) {
+            throw new Error('language.labels must contain fields.');
         }
         Object.assign(language.labels, emojis);
         this._languages[languageCode] = language;
@@ -76,7 +79,7 @@ export class LanguageProcessor {
      * Retrieves a language object from the cache,
      * or tries to load it from the set of supported languages
      * @param {string | undefined} languageCode Two-digit code for the language to fetch
-     * @returns
+     * @returns {Promise<Language>} The language associated with the given language code
      * @memberof LanguageProcessor
      */
     async getLanguage(languageCode?: string): Promise<Language> {
@@ -100,7 +103,7 @@ export class LanguageProcessor {
      * @returns
      * @memberof LanguageProcessor
      */
-    async getLabels(languageCode: string) {
+    async getLabels(languageCode: string): Promise<{[index: string]: number}> {
         const language = await this.getLanguage(languageCode);
         if (!language) {
             throw new Error(`Could not get labels for language: ${languageCode}`);
