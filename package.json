@@ -5,6 +5,9 @@
   "version": "5.0.1",
   "license": "MIT",
   "homepage": "https://github.com/thisandagain/sentiment",
+  "contributors": [
+    "Joseph Harrison-Lim <josephharrisonlim@gmail.com>"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/thisandagain/sentiment.git"
@@ -15,19 +18,28 @@
     "nlp",
     "sentiment analysis"
   ],
-  "main": "./lib/index.js",
+  "main": "./lib/src/index.js",
+  "types": "",
   "scripts": {
     "build": "tsc",
     "build:emoji": "node ./build/build.js",
+    "build:types": "tsc --declaration --outdir lib --emitDeclarationOnly",
     "documentation": "typedoc --out docs --exclude '*.json' ./src",
     "test:lint": "eslint . --ext=js",
-    "test:unit": "tap test/unit/*.js",
+    "test:unit": "jest -c jest.config.unit.js",
     "test:integration": "tap test/integration/*.js",
     "test:benchmark": "node ./test/benchmark/performance.js",
     "test:validate": "node ./test/benchmark/validate.js",
     "test:coverage": "tap './test/{integration,unit}/*.js' --coverage --coverage-report=lcov",
     "test": "npm run test:lint && npm run test:unit && npm run test:integration && npm run test:benchmark && npm run test:validate"
   },
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "/lib",
+    "LICENSE"
+  ],
   "devDependencies": {
     "@types/jest": "^24.0.13",
     "@types/node": "^12.0.2",
@@ -37,7 +49,6 @@
     "eslint": "^5.0.1",
     "jest": "^24.8.0",
     "mock-require": "^3.0.1",
-    "tap": "^12.0.1",
     "ts-jest": "^24.0.2",
     "typedoc": "^0.14.2",
     "typescript": "^3.4.5"

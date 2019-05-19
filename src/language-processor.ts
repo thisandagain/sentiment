@@ -2,7 +2,7 @@ import emojis from '../emoji/emoji.json';
 
 // English is loaded by default
 import { english } from '../languages/en';
-import { Language } from './language';
+import { Language } from '../languages/language';
 import { join } from 'path';
 import { ScoringStrategy } from './scoring-strategy';
 
