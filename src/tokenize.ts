@@ -5,7 +5,7 @@
  * @param  {string} input Input string
  * @return {array}        Array of tokens
  */
-module.exports = function(input) {
+export function tokenize(input: string): Array<string> {
     return input
         .toLowerCase()
         .replace(/\n/g, ' ')
