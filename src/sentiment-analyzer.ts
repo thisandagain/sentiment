@@ -9,17 +9,47 @@ import { Language } from './language';
  */
 interface AnalyzeResult {
     /**
-     * 
+     * Score calculated by adding the sentiment values of recongnized words
      *
      * @type {number}
      * @memberof AnalyzeResult
      */
-    score: number,
-    comparative: number,
-    tokens: string[],
-    words: string[],
-    positive: string[],
-    negative: string[]
+    score: number;
+    /**
+     * Comparative score of the input string
+     *
+     * @type {number}
+     * @memberof AnalyzeResult
+     */
+    comparative: number;
+    /**
+     * All the tokens like words or emojis found in the input string
+     *
+     * @type {string[]}
+     * @memberof AnalyzeResult
+     */
+    tokens: string[];
+    /**
+     * List of words from input string that were found in AFINN list
+     *
+     * @type {string[]}
+     * @memberof AnalyzeResult
+     */
+    words: string[];
+    /**
+     * List of postive words in input string that were found in AFINN list
+     *
+     * @type {string[]}
+     * @memberof AnalyzeResult
+     */
+    positive: string[];
+    /**
+     * List of negative words in input string that were found in AFINN list
+     *
+     * @type {string[]}
+     * @memberof AnalyzeResult
+     */
+    negative: string[];
 }
 
 /**
@@ -48,8 +78,16 @@ interface AnalyzeOptions {
     languageCode?: string;
 }
 
+/**
+ * Creates an instance of Sentiment; a tool for AFINN Sentiment analysis.
+ * Comes prepacked with English language defaults, and has the ability to be extended
+ * with new languages.
+ * 
+ * @export
+ * @class Sentiment
+ */
 export class Sentiment {
-    private _languageProcessor: LanguageProcessor;
+    private readonly _languageProcessor: LanguageProcessor;
 
     /**
      * Creates an instance of Sentiment.
@@ -103,44 +141,30 @@ export class Sentiment {
         }
 
         const tokens = tokenize(phrase);
-        let   score:    number   = 0;
-        const words:    string[] = [];
+        let score: number = 0;
+        const words: string[] = [];
         const positive: string[] = [];
         const negative: string[] = [];
 
         // Iterate over tokens
-        // let i = tokens.length;
-
-        await Promise.all(tokens.map(async (token, i) => {
-            if (!labels.hasOwnProperty(token))
-                return;
-
+        let i = tokens.length;
+        while (i--) {
+            const token = tokens[i];
+            if (!labels.hasOwnProperty(token)) {
+                continue;
+            }
             words.push(token);
-            const tokenScore = labels[token];
+
+            // Apply scoring strategy
+            const tokenScore = await this._languageProcessor
+                .applyScoringStrategy(languageCode, tokens, i, labels[token]);
+
             if (tokenScore > 0)
-                positive.push(token)
+                positive.push(token);
             if (tokenScore < 0)
                 negative.push(token);
-
-            score += await this._languageProcessor
-                .applyScoringStrategy(languageCode, tokens, i, tokenScore);
-        }));
-        // while (i--) {
-        //     const token = tokens[i];
-        //     if (!labels.hasOwnProperty(token)) {
-        //         continue;
-        //     }
-
-        //     words.push(token);
-
-        //     // Apply scoring strategy
-        //     let tokenScore = labels[token];
-        //     // eslint-disable-next-line max-len
-        //     tokenScore = await this._languageProcessor.applyScoringStrategy(languageCode, tokens, i, tokenScore);
-        //     if (tokenScore > 0) positive.push(token);
-        //     if (tokenScore < 0) negative.push(token);
-        //     score += tokenScore;
-        // }
+            score += tokenScore;
+        }
 
         const result: AnalyzeResult = {
             score,
@@ -155,23 +179,3 @@ export class Sentiment {
     }
 }
 
-
-
-// /**
-//  * 
-//  *
-//  * @param {String} phrase
-//  *     - Input phrase
-//  * @param {Object} opts
-//  *     - Options
-//  * @param {Object} opts.language
-//  *     - Input language code (2 digit code), defaults to 'en'
-//  * @param {Object} opts.extras
-//  *     - Optional sentiment additions to AFINN (hash k/v pairs)
-//  * @param {function} callback
-//  *     - Optional callback
-//  * @return {Object}
-//  */
-// Sentiment.prototype.analyze = function (phrase, opts, callback) {
-
-// };

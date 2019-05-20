@@ -52,7 +52,7 @@ async function loadLanguage(languageCode: string): Promise<Language> {
 
 
 export class LanguageProcessor {
-    private _languages: Languages;
+    private readonly _languages: Languages;
 
     constructor() {
         this._languages = { en: english };
