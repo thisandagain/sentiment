@@ -79,10 +79,10 @@ console.dir(result);    // Score: -2, Comparative: -0.5
 
 Typescript:
 ```ts
-import { Sentiment, Language } from 'sentiment';
+import { Sentiment, LanguageInput } from 'sentiment';
 
 const sentiment = new Sentiment();
-const frLanguage: Langauge = {
+const frLanguage: LangaugeInput = {
   labels: { 'stupide': -2 }
 };
 sentiment.registerLanguage('fr', frLanguage);
@@ -101,16 +101,14 @@ const sentiment = new Sentiment();
 
 const frLanguage = {
   labels: { 'stupide': -2 },
-  scoringStrategy: {
-    apply: function(tokens, cursor, tokenScore) {
-      if (cursor > 0) {
-        const prevtoken = tokens[cursor - 1];
-        if (prevtoken === 'pas') {
-          tokenScore = -tokenScore;
-        }
+  scoringStrategy: function(tokens, cursor, tokenScore) {
+    if (cursor > 0) {
+      const prevtoken = tokens[cursor - 1];
+      if (prevtoken === 'pas') {
+        tokenScore = -tokenScore;
       }
-      return tokenScore;
     }
+    return tokenScore;
   }
 };
 sentiment.registerLanguage('fr', frLanguage);
@@ -121,22 +119,21 @@ console.dir(result);    // Score: 2, Comparative: 0.4
 
 Typescript:
 ```ts
-import { Sentiment, Language } from 'sentiment';
+import { Sentiment, LanguageInput } from 'sentiment';
 
-const frLanguage: Language = {
+const frLanguage: LanguageInput = {
   labels: { 'stupide': -2 },
-  scoringStrategy: {
-    apply: (tokens, cursor, tokenScore) => {
-      if (cursor > 0) {
-        const prevtoken = tokens[cursor - 1];
-        if (prevtoken === 'pas') {
-          tokenScore = -tokenScore;
-        }
+  scoringStrategy: (tokens, cursor, tokenScore) => {
+    if (cursor > 0) {
+      const prevtoken = tokens[cursor - 1];
+      if (prevtoken === 'pas') {
+        tokenScore = -tokenScore;
       }
-      return tokenScore;
     }
+    return tokenScore;
   }
-}
+};
+
 const sentiment = new Sentiment();
 
 sentiment.registerLanguage('fr', frLanguage);
@@ -202,19 +199,19 @@ console.dir(result);    // Score: 7, Comparative: 1.75
 
 #### `sentiment.registerLanguage(languageCode, language)`
 
-| Argument     | Type       | Required | Description                                                         |
-| ------------ | ---------- | -------- | ------------------------------------------------------------------- |
-| languageCode | `string`   | `true`   | International two-digit code for the language to add                |
-| language     | `Language` | `true`   | Language module (see [Adding new languages](#adding-new-languages)) |
+| Argument     | Type            | Required | Description                                                         |
+| ------------ | --------------- | -------- | ------------------------------------------------------------------- |
+| languageCode | `string`        | `true`   | International two-digit code for the language to add                |
+| language     | `LanguageInput` | `true`   | Language module (see [Adding new languages](#adding-new-languages)) |
 
 ---
 
 #### `Language`
 
-| Property        | Type                       | Default     | Description                                       |
-| --------------- | -------------------------- | ----------- | ------------------------------------------------- |
-| labels          | `{[word: string]: number}` | `'en'`      | Set of labels and their associated values         |
-| scoringStrategy | `ScoringStrategy`          | `undefined` | A function used to calculate the score for a word |
+| Property        | Type                       | Default                  | Description                                                                                            |
+| --------------- | -------------------------- | ------------------------ | ------------------------------------------------------------------------------------------------------ |
+| labels          | `{[word: string]: number}` | `'en'`                   | Set of labels and their associated values                                                              |
+| scoringStrategy | `ScoringStrategy`          | `defaultScoringStrategy` | A function used to calculate the score for a word. The default function simply returns the tokenScore. |
 
 ---
 
