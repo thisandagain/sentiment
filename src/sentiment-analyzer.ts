@@ -57,7 +57,7 @@ interface AnalyzeResult {
  *
  * @interface AnalyzeOptions
  */
-interface AnalyzeOptions {
+export interface AnalyzeOptions {
     /**
      * An optional object with strings mapped to their sentiment value.
      * Optional sentiment additions to AFINN (hash k/v pairs)

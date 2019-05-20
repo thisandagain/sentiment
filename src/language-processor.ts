@@ -11,11 +11,7 @@ type Languages = { [index: string]: Language };
 // Merge English with Emojis
 Object.assign(english.labels, emojis);
 
-const defaultScoringStrategy: ScoringStrategy = {
-    apply: function (_tokens, _cursor, tokenScore) {
-        return tokenScore;
-    }
-};
+const defaultScoringStrategy: ScoringStrategy = (_tokens, _cursor, tokenScore) => tokenScore;
 
 
 /**
@@ -102,7 +98,7 @@ export class LanguageProcessor {
      * @returns
      * @memberof LanguageProcessor
      */
-    getLabels(languageCode: string): {[index: string]: number} {
+    getLabels(languageCode: string): { [index: string]: number } {
         const language = this.getLanguage(languageCode);
         if (!language) {
             throw new Error(`Could not get labels for language: ${languageCode}`);
@@ -125,6 +121,6 @@ export class LanguageProcessor {
         // Fallback to default strategy if none was specified
         // eslint-disable-next-line max-len
         const scoringStrategy = language.scoringStrategy || defaultScoringStrategy;
-        return scoringStrategy.apply(tokens, cursor, tokenScore);
+        return scoringStrategy(tokens, cursor, tokenScore);
     }
 }
