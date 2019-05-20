@@ -1,10 +1,10 @@
 import sentiment from '../../src';
 
-test('Sentiment Default Import', async () => {
+test('Sentiment Default Import', () => {
     const input = 'This is so cool';
 
-    const result = await sentiment.analyze(input);
-    
+    const result = sentiment.analyze(input);
+
     expect(result.score).toBeGreaterThan(0);
 
     expect(typeof result).toEqual('object');

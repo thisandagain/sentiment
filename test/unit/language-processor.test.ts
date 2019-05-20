@@ -12,10 +12,10 @@ describe('LanguageProcessor', () => {
     });
 
     describe('#getLanguage', () => {
-        it('returns the default language English when given "en"', async () => {
+        it('returns the default language English when given "en"', () => {
             const languageProcessor = new LanguageProcessor();
 
-            const language = await languageProcessor.getLanguage('en');
+            const language = languageProcessor.getLanguage('en');
 
             expect(language).toBeDefined();
             expect(language.labels).toBeDefined();
@@ -23,32 +23,32 @@ describe('LanguageProcessor', () => {
             expect(language.scoringStrategy!.apply).toBeDefined();
         });
 
-        it('throws an error when given a language code that does not exist', async () => {
+        it('throws an error when given a language code that does not exist', () => {
             const languageProcessor = new LanguageProcessor();
 
-            return expect(languageProcessor.getLanguage('fake')).rejects.toHaveProperty('stack');
+            expect(() => languageProcessor.getLanguage('fake')).toThrow();
         });
     });
 
     describe('#getLabels', () => {
-        it('returns the labels for english when given "en"', async () => {
+        it('returns the labels for english when given "en"', () => {
             const languageProcessor = new LanguageProcessor();
 
-            const labels = await languageProcessor.getLabels('en');
+            const labels = languageProcessor.getLabels('en');
 
             expect(labels).toEqual(englishLabels);
         });
 
-        it('throws an error when given a language code that does not exist', async () => {
+        it('throws an error when given a language code that does not exist', () => {
             const languageProcessor = new LanguageProcessor();
 
-            return expect(languageProcessor.getLabels('fake')).rejects.toHaveProperty('stack');
+            return expect(() => languageProcessor.getLabels('fake')).toThrow();
         });
     });
 
     describe('#addLanguage', () => {
         it('successfully adds a new language when given labels as well as combining them with emojis',
-            async () => {
+            () => {
                 const languageProcessor = new LanguageProcessor();
                 const languageCode = 'fr';
                 const lang: Language = {
@@ -59,7 +59,7 @@ describe('LanguageProcessor', () => {
                 };
 
                 languageProcessor.addLanguage(languageCode, lang);
-                const result = await languageProcessor.getLanguage(languageCode);
+                const result = languageProcessor.getLanguage(languageCode);
                 return expect(result.labels).toEqual({ ...lang.labels, ...emojis });
             }
         );
@@ -78,7 +78,7 @@ describe('LanguageProcessor', () => {
             const languageCode = 'fr';
 
             expect(() => {
-                languageProcessor.addLanguage(languageCode, { 
+                languageProcessor.addLanguage(languageCode, {
                     labels: {
 
                     }

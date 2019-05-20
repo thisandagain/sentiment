@@ -19,7 +19,7 @@ const yelp = require('../fixtures/yelp.json');
  * @param {Array<{text: string, class: number}>} set
  * @returns
  */
-async function validate(set) {
+function validate(set) {
     const sentiment = new Sentiment();
 
     const tally = {
@@ -29,7 +29,7 @@ async function validate(set) {
 
     // Iterate over each word/class pair in the dataset
     for (let pair of set) {
-        const score = (await sentiment.analyze(pair.text)).comparative;
+        const score = sentiment.analyze(pair.text).comparative;
         if (pair.class === 0) {
             if (score >= 0) tally.fail++;
             if (score < 0) tally.pass++;
@@ -44,11 +44,11 @@ async function validate(set) {
 }
 
 
-void async function run() {
-    const amazonAccuracy = await validate(amazon);
-    const imdbAccuracy = await validate(imdb);
-    const yelpAccuracy = await validate(yelp);
+void function run() {
+    const amazonAccuracy = validate(amazon);
+    const imdbAccuracy = validate(imdb);
+    const yelpAccuracy = validate(yelp);
     console.log('Amazon accuracy: ' + amazonAccuracy + '\n');
     console.log('IMDB accuracy:   ' + imdbAccuracy + '\n');
     console.log('Yelp accuracy:   ' + yelpAccuracy + '\n');
-}().catch(console.error);
+}();

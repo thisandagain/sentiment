@@ -1,12 +1,12 @@
 
-import { Sentiment }from '../../src';
+import { Sentiment } from '../../src';
 
 
-test('Negative Sentiment', async () => {
+test('Negative Sentiment', () => {
     const sentiment = new Sentiment();
     const input = 'Hey you worthless scumbag';
     
-    const result = await sentiment.analyze(input);
+    const result = sentiment.analyze(input);
     
     expect(typeof result).toEqual('object');
     expect(result.score).toEqual(-6);

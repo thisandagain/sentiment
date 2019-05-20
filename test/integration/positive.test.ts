@@ -1,13 +1,13 @@
 import { Sentiment } from '../../src';
 
-test('Positive Sentiment', async () => {
+test('Positive Sentiment', () => {
     const sentiment = new Sentiment();
     const input = 'This is so cool';
-
-    const result = await sentiment.analyze(input);
+    
+    const result = sentiment.analyze(input);
     
     expect(result.score).toBeGreaterThan(0);
-
+    
     expect(typeof result).toEqual('object');
     expect(result.score).toBe(1);
     expect(result.comparative).toBeCloseTo(0.25);

@@ -1,11 +1,11 @@
 import { fuzz } from '../fixtures/fuzz';
 import { Sentiment } from '../../src';
 
-test('Fuzz', async () => {
+test('Fuzz', () => {
     const sentiment = new Sentiment();
     const input = fuzz(1000);
 
-    const result = await sentiment.analyze(input);
+    const result = sentiment.analyze(input);
 
     expect(result).toBeDefined();
     expect(result.comparative).toBeDefined();

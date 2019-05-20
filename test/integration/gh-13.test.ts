@@ -1,11 +1,11 @@
 import { Sentiment } from '../../src';
 
 // Related issue: https://github.com/thisandagain/sentiment/issues/13
-test('GH Issue 13 - Constructor bug', async () => {
+test('GH Issue 13 - Constructor bug', () => {
     const sentiment = new Sentiment();
     const input = 'constructor';
 
-    const result = await sentiment.analyze(input);
+    const result = sentiment.analyze(input);
 
     expect(typeof result).toBe('object');
     expect(result.score).toEqual(0);

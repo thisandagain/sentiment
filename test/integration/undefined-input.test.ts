@@ -1,8 +1,8 @@
 import { Sentiment } from '../../src';
 
-test('Undefined Input', async () => {
+test('Undefined Input', () => {
     const sentiment = new Sentiment();
     const input = undefined;
 
-    expect(sentiment.analyze(input as any)).rejects.toHaveProperty('stack');
+    expect(() => sentiment.analyze(input as any)).toThrow();
 });

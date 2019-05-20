@@ -106,8 +106,8 @@ export class Sentiment {
         this._languageProcessor.addLanguage(languageCode, language);
     }
 
-    analyze(phrase: string): Promise<AnalyzeResult>;
-    analyze(phrase: string, opts: AnalyzeOptions): Promise<AnalyzeResult>;
+    analyze(phrase: string): AnalyzeResult;
+    analyze(phrase: string, opts: AnalyzeOptions): AnalyzeResult;
 
     /**
      * Performs sentiment analysis on the provided input 'phrase'.
@@ -116,7 +116,7 @@ export class Sentiment {
      * @param {AnalyzeOptions} analyzeOptions Options such as the language code or extra AFINN pairs
      * @memberof Sentiment
      */
-    async analyze(phrase: string, analyzeOptions?: AnalyzeOptions): Promise<AnalyzeResult> {
+    analyze(phrase: string, analyzeOptions?: AnalyzeOptions): AnalyzeResult {
         let opts: AnalyzeOptions = {};
         if (analyzeOptions) {
             if (analyzeOptions.extras || analyzeOptions.languageCode) {
@@ -133,7 +133,7 @@ export class Sentiment {
         }
 
         const languageCode = opts.languageCode || 'en';
-        const labels = await this._languageProcessor.getLabels(languageCode);
+        const labels = this._languageProcessor.getLabels(languageCode);
 
         // Merge extra labels
         if (typeof opts.extras === 'object') {
@@ -156,7 +156,7 @@ export class Sentiment {
             words.push(token);
 
             // Apply scoring strategy
-            const tokenScore = await this._languageProcessor
+            const tokenScore = this._languageProcessor
                 .applyScoringStrategy(languageCode, tokens, i, labels[token]);
 
             if (tokenScore > 0)

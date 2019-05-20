@@ -1,10 +1,10 @@
 import { Sentiment } from '../../src';
 
-test('Negation', async () => {
+test('Negation', () => {
     const sentiment = new Sentiment();
     const input = 'I don\'t hate you';
 
-    const result = await sentiment.analyze(input);
+    const result = sentiment.analyze(input);
     
     expect(result.score).toBeGreaterThan(0);
 

@@ -1,10 +1,10 @@
 import { Sentiment } from '../../src';
 import { corpus } from '../fixtures/corpus.json';
 
-test('Corpus', async () => {
+test('Corpus', () => {
     const sentiment = new Sentiment();
 
-    const result = await sentiment.analyze(corpus);
+    const result = sentiment.analyze(corpus);
 
     expect(typeof result).toBe('object');
     expect(result.score).toBe(-3);

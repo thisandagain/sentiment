@@ -18,10 +18,10 @@ describe("Sentiment", () => {
             expect(sentiment.analyze).toBeInstanceOf(Function);
             expect(typeof sentiment.analyze).toBe('function');
         });
-        it('analyzes a string and returns a result with all of the expected fields', async () => {
+        it('analyzes a string and returns a result with all of the expected fields',  () => {
             const sentiment = new Sentiment();
 
-            const result = await sentiment.analyze('Hello world');
+            const result =  sentiment.analyze('Hello world');
 
             expect(result).toBeDefined();
             expect(typeof result.score).toBe('number');
@@ -34,7 +34,7 @@ describe("Sentiment", () => {
 
         describe('when a language is registered', () => {
             it('can analyze with the default scoring strategy and ' +
-                'the registered language by specifying the language code', async () => {
+                'the registered language by specifying the language code',  () => {
                     const sentiment = new Sentiment();
                     const languageCode = 'te';
                     const language: Language = {
@@ -53,7 +53,7 @@ describe("Sentiment", () => {
                         score,
                         tokens,
                         words,
-                    } = await sentiment.analyze('foo bar baz qwop', { languageCode });
+                    } =  sentiment.analyze('foo bar baz qwop', { languageCode });
 
                     expect(score).toBe(2);
                     

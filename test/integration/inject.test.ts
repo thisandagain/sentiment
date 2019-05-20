@@ -1,10 +1,10 @@
 import { Sentiment } from '../../src';
 
-test('Inject', async () => {
+test('Inject', () => {
     const sentiment = new Sentiment();
     const input = 'This is so cool';
 
-    const result = await sentiment.analyze(input, {
+    const result = sentiment.analyze(input, {
         extras: {
             'cool': 100
         }

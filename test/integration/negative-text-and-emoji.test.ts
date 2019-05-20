@@ -1,11 +1,11 @@
 import { Sentiment } from '../../src';
 
-test('Negative Text and Emoji', async () => {
+test('Negative Text and Emoji', () => {
     const sentiment = new Sentiment();
     const input = 'Hey you worthless scumbag 😦';
     const expectedTokens = ['hey', 'you', 'worthless', 'scumbag', '😦'];
     const expectedWords = ['worthless', 'scumbag', '😦'];
-    const result = await sentiment.analyze(input);
+    const result = sentiment.analyze(input);
 
     expect(result).toBeDefined();
     expect(result.score).toBe(-8);

@@ -23,21 +23,11 @@ const sentiment = new Sentiment();
  */
 const suite = new Suite();
 suite
-    .add('sentiment (Latest)  - Short:', {
-        defer: true,
-        fn: function(r) {
-            sentiment.analyze(stringShort).then(() => {
-                r.resolve();
-            });
-        }
+    .add('sentiment (Latest)  - Short:', function () {
+        sentiment.analyze(stringShort);
     })
-    .add('sentiment (Latest)  - Long :', {
-        defer: true,
-        fn: function(r) {
-            sentiment.analyze(corpus).then(() => {
-                r.resolve();
-            });
-        }
+    .add('sentiment (Latest)  - Long :', function () {
+        sentiment.analyze(corpus);
     })
     .add('Sentimental (1.0.1) - Short:', function () {
         sentimental.analyze(stringShort);

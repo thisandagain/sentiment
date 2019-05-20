@@ -28,9 +28,9 @@ const defaultScoringStrategy: ScoringStrategy = {
  *  > Note: Remember that the .ts files will actually be .js at runtime.
  * @param {string} languageCode
  */
-async function loadLanguage(languageCode: string): Promise<Language> {
+function loadLanguage(languageCode: string): Language {
     const languagePath = join(__dirname, '..', 'languages', languageCode, 'index');
-    const language: Language = await import(languagePath);
+    const language: Language = require(languagePath);
     if (!language) {
         throw new Error('No language found: ' + languageCode);
     }
@@ -81,7 +81,7 @@ export class LanguageProcessor {
      * @returns {Promise<Language>} The language associated with the given language code
      * @memberof LanguageProcessor
      */
-    async getLanguage(languageCode?: string): Promise<Language> {
+    getLanguage(languageCode?: string): Language {
         if (!languageCode) {
             // Default to english if no language was specified
             return this._languages.en;
@@ -89,7 +89,7 @@ export class LanguageProcessor {
         if (this._languages[languageCode]) {
             return this._languages[languageCode];
         }
-        const language = await loadLanguage(languageCode);
+        const language = loadLanguage(languageCode);
         // Add language to in-memory cache
         this.addLanguage(languageCode, language);
         return language;
@@ -102,8 +102,8 @@ export class LanguageProcessor {
      * @returns
      * @memberof LanguageProcessor
      */
-    async getLabels(languageCode: string): Promise<{[index: string]: number}> {
-        const language = await this.getLanguage(languageCode);
+    getLabels(languageCode: string): {[index: string]: number} {
+        const language = this.getLanguage(languageCode);
         if (!language) {
             throw new Error(`Could not get labels for language: ${languageCode}`);
         }
@@ -120,8 +120,8 @@ export class LanguageProcessor {
      * @returns
      * @memberof LanguageProcessor
      */
-    async applyScoringStrategy(languageCode: string, tokens: string[], cursor: number, tokenScore: number) {
-        const language = await this.getLanguage(languageCode);
+    applyScoringStrategy(languageCode: string, tokens: string[], cursor: number, tokenScore: number) {
+        const language = this.getLanguage(languageCode);
         // Fallback to default strategy if none was specified
         // eslint-disable-next-line max-len
         const scoringStrategy = language.scoringStrategy || defaultScoringStrategy;
