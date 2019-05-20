@@ -1,7 +1,7 @@
 { // use separate tsconfig for builds to exclude dirs. This lets the
   // VS Code linter use the tsconfig.json for linting tests properly.
  "compilerOptions": {
-     "target": "esnext"
+     "target": "es6"
  }, 
     "extends": "./tsconfig.json",
     "exclude": [
