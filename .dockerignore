@@ -1,0 +1,6 @@
+node_modules
+Dockerfile
+.circleci
+.vscode
+docs
+lib
