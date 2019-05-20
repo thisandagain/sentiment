@@ -23,6 +23,17 @@ describe('LanguageProcessor', () => {
             expect(language.scoringStrategy!.apply).toBeDefined();
         });
 
+        it('returns English when not given any language code', () => {
+            const languageProcessor = new LanguageProcessor();
+
+            const language = languageProcessor.getLanguage();
+
+            expect(language).toBeDefined();
+            expect(language.labels).toBeDefined();
+            expect(language.scoringStrategy).toBeDefined();
+            expect(language.scoringStrategy!.apply).toBeDefined();
+        });
+
         it('throws an error when given a language code that does not exist', () => {
             const languageProcessor = new LanguageProcessor();
 

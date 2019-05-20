@@ -90,13 +90,15 @@ export class LanguageProcessor {
      * @memberof LanguageProcessor
      */
     getLanguage(languageCode?: string): Language {
+        // Default to english if no language was specified
         if (!languageCode) {
-            // Default to english if no language was specified
             return this._languages.en;
         }
+        // Try loading from the cache
         if (this._languages[languageCode]) {
             return this._languages[languageCode];
         }
+        // Try loading language from one of the language roots in the languages directory
         const language = loadLanguage(languageCode);
         // Add language to in-memory cache
         this.addLanguage(languageCode, language);
