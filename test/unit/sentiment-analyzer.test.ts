@@ -1,4 +1,4 @@
-import { Sentiment } from '../../src';
+import { Sentiment, AnalyzeOptions } from '../../src';
 import { LanguageInput } from '../../src';
 
 describe("Sentiment", () => {
@@ -18,6 +18,7 @@ describe("Sentiment", () => {
             expect(sentiment.analyze).toBeInstanceOf(Function);
             expect(typeof sentiment.analyze).toBe('function');
         });
+
         it('analyzes a string and returns a result with all of the expected fields',  () => {
             const sentiment = new Sentiment();
 
@@ -30,6 +31,30 @@ describe("Sentiment", () => {
             expect(result.positive).toBeInstanceOf(Array);
             expect(result.tokens).toBeInstanceOf(Array);
             expect(result.words).toBeInstanceOf(Array);
+        });
+
+        it('throws an error when given invalid options', () => {
+            const sentiment = new Sentiment();
+            const badOptions = { floop: true, glorp: true } as AnalyzeOptions;
+            expect(() => sentiment.analyze('Hello world', badOptions)).toThrow();
+        });
+
+        it('returns a response with a positive score for a positive sentence', () => {
+            const sentiment = new Sentiment();
+
+            const response = sentiment.analyze('This is a wonderful test!');
+
+            expect(response).toBeDefined();
+            expect(response.score).toBeGreaterThan(0);
+        });
+
+        it('returns a response with a negative score for a negative sentence', () => {
+            const sentiment = new Sentiment();
+
+            const response = sentiment.analyze('This is a terrible test!');
+
+            expect(response).toBeDefined();
+            expect(response.score).toBeLessThan(0);
         });
 
         describe('when a language is registered', () => {
