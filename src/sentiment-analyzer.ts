@@ -1,6 +1,5 @@
 import { tokenize } from './tokenize';
-import { LanguageProcessor } from './language-processor';
-import { Language } from './language';
+import { LanguageProcessor, LanguageInput } from './language-processor';
 
 /**
  * The final result of the analysis.
@@ -100,9 +99,9 @@ export class Sentiment {
     /**
      * Registers the specified language
      * @param {string} languageCode Two-digit code for the language to register
-     * @param {Language} language The language module to register
+     * @param {LanguageInput} language The language module to register
      */
-    registerLanguage(languageCode: string, language: Language) {
+    registerLanguage(languageCode: string, language: LanguageInput) {
         this._languageProcessor.addLanguage(languageCode, language);
     }
 

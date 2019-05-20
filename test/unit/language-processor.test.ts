@@ -1,7 +1,7 @@
-import { LanguageProcessor } from '../../src/language-processor';
+import { ScoringStrategy, LanguageInput, LanguageProcessor } from '../../src';
+
 import englishLabels from '../../languages/en/labels.json';
 import emojis from '../../emoji/emoji.json';
-import { Language } from '../../languages/language';
 
 describe('LanguageProcessor', () => {
     describe('#constructor', () => {
@@ -51,7 +51,7 @@ describe('LanguageProcessor', () => {
             () => {
                 const languageProcessor = new LanguageProcessor();
                 const languageCode = 'fr';
-                const lang: Language = {
+                const lang: LanguageInput = {
                     labels: {
                         a: 2,
                         b: -1
@@ -64,6 +64,50 @@ describe('LanguageProcessor', () => {
             }
         );
 
+        it('successfully adds a new language when given labels and scoring strategy', () => {
+            const languageProcessor = new LanguageProcessor();
+            const languageCode = 'fr';
+            const scoringStrategy: ScoringStrategy = (_tokens, _cursor, tScore) => {
+                return tScore;
+            };
+            const lang: LanguageInput = {
+                labels: {
+                    a: 5,
+                    b: -3
+                },
+                scoringStrategy
+            };
+
+            languageProcessor.addLanguage(languageCode, lang);
+            const result = languageProcessor.getLanguage(languageCode);
+
+            expect(result.labels).toBeDefined();
+            expect(result.scoringStrategy).toBeDefined();
+            expect(result.labels).toHaveProperty('a');
+            expect(result.labels).toHaveProperty('b');
+            expect(result.labels.a).toBe(5);
+            expect(result.labels.b).toBe(-3);
+        });
+
+        it('will successfully use given scoring strategy', () => {
+            const languageProcessor = new LanguageProcessor();
+            const languageCode = 'aa';
+
+            const scoringStrategy: ScoringStrategy = (_tokens, _cursor, _tScore) => {
+                return 100;
+            };
+
+            languageProcessor.addLanguage(languageCode, {
+                labels: { foo: 1 },
+                scoringStrategy
+            });
+
+            const language = languageProcessor.getLanguage(languageCode);
+            const result = language!.scoringStrategy(['foo'], 0, 1);
+
+            expect(result).toBe(100);
+
+        });
         it('will throw an error if labels is undefined', () => {
             const languageProcessor = new LanguageProcessor();
             const languageCode = 'fr';

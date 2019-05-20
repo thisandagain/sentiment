@@ -8,6 +8,11 @@ import { ScoringStrategy } from './scoring-strategy';
 
 type Languages = { [index: string]: Language };
 
+export interface LanguageInput extends Partial<Language> {
+    labels: { [index: string]: number; };
+    scoringStrategy?: ScoringStrategy;
+}
+
 // Merge English with Emojis
 Object.assign(english.labels, emojis);
 
@@ -59,15 +64,22 @@ export class LanguageProcessor {
      * @param {string} languageCode Two-digit code for the language to register
      * @param {Language} language The language module to register
      */
-    addLanguage(languageCode: string, language: Language): void {
+    addLanguage(languageCode: string, language: LanguageInput): void {
         if (!language.labels) {
             throw new Error('language.labels must be defined.');
         }
         if (Object.keys(language.labels).length === 0) {
             throw new Error('language.labels must contain fields.');
         }
+        if(!language.scoringStrategy) {
+            language.scoringStrategy = defaultScoringStrategy;
+        }
+
         Object.assign(language.labels, emojis);
-        this._languages[languageCode] = language;
+        this._languages[languageCode] = { 
+            labels: language!.labels,
+            scoringStrategy: language!.scoringStrategy
+        };
     }
 
     /**

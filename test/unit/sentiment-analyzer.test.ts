@@ -1,5 +1,5 @@
 import { Sentiment } from '../../src';
-import { Language } from '../../languages/language';
+import { LanguageInput } from '../../src';
 
 describe("Sentiment", () => {
     describe('#constructor', () => {
@@ -37,7 +37,7 @@ describe("Sentiment", () => {
                 'the registered language by specifying the language code',  () => {
                     const sentiment = new Sentiment();
                     const languageCode = 'te';
-                    const language: Language = {
+                    const language: LanguageInput = {
                         labels: {
                             foo: 2,
                             bar: 2,
@@ -92,7 +92,7 @@ describe("Sentiment", () => {
         it('successfully adds a new language when given labels', () => {
             const sentiment = new Sentiment();
             const languageCode = 'fr';
-            const lang: Language = {
+            const lang: LanguageInput = {
                 labels: {
                     a: 2,
                     b: -1

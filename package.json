@@ -25,6 +25,7 @@
     "build:emoji": "node ./emoji/build.js",
     "build:types": "npm run build -- --declaration --outdir lib --emitDeclarationOnly",
     "documentation": "typedoc --out docs --exclude '*.json' ./src",
+    "lint": "tsc --noEmit",
     "test:unit": "jest -c jest.config.unit.js",
     "test:integration": "jest -c jest.config.integration.js",
     "test:benchmark": "npm run build && node ./test/benchmark/performance.test.js",
