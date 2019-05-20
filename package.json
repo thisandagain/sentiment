@@ -31,7 +31,7 @@
     "test:integration": "jest -c jest.config.integration.js",
     "test:benchmark": "npm run build && node ./test/benchmark/performance.test.js",
     "test:validate": "npm run build && node ./test/benchmark/validate.test.js",
-    "test:coverage": "tap './test/{integration,unit}/*.js' --coverage --coverage-report=lcov",
+    "test:coverage": "jest -c jest.config.coverage.js --coverage",
     "test:watch": "jest -c jest.config.unit.js --watch",
     "test": "npm run test:unit && npm run test:integration && npm run test:benchmark && npm run test:validate"
   },
