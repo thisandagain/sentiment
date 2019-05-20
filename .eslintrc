@@ -5,10 +5,16 @@
         "indent": [2, 4],
         "quotes": [2, "single"],
         "semi": [2, "always"],
-        "strict": [2, "never"]
+        "strict": [2, "never"],
+        "no-console": "off"
     },
     "env": {
-        "node": true
+        "node": true,
+        "es6": true,
+        "jest": true
+    },
+    "parserOptions": {
+        "ecmaVersion": 2018
     },
     "extends": "eslint:recommended"
 }

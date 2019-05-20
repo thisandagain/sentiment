@@ -1,5 +1,5 @@
 import { Sentiment } from '../../src';
-import { corpus } from '../fixtures/corpus';
+import { corpus } from '../fixtures/corpus.json';
 
 test('Corpus', async () => {
     const sentiment = new Sentiment();

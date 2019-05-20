@@ -28,8 +28,8 @@
     "test:lint": "eslint . --ext=js",
     "test:unit": "jest -c jest.config.unit.js",
     "test:integration": "jest -c jest.config.integration.js",
-    "test:benchmark": "node ./test/benchmark/performance.js",
-    "test:validate": "node ./test/benchmark/validate.js",
+    "test:benchmark": "npm run build && node ./test/benchmark/performance.test.js",
+    "test:validate": "npm run build && node ./test/benchmark/validate.test.js",
     "test:coverage": "tap './test/{integration,unit}/*.js' --coverage --coverage-report=lcov",
     "test:watch": "jest -c jest.config.unit.js --watch",
     "test": "npm run test:lint && npm run test:unit && npm run test:integration && npm run test:benchmark && npm run test:validate"
@@ -42,12 +42,13 @@
     "LICENSE"
   ],
   "devDependencies": {
+    "@types/benchmark": "^1.0.31",
     "@types/jest": "^24.0.13",
     "@types/node": "^12.0.2",
     "Sentimental": "1.0.1",
     "async": "^2.1.5",
-    "benchmark": "^2.1.0",
-    "eslint": "^5.0.1",
+    "benchmark": "^2.1.4",
+    "eslint": "^5.16.0",
     "jest": "^24.8.0",
     "mock-require": "^3.0.1",
     "ts-jest": "^24.0.2",
