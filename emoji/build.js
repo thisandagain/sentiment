@@ -1,79 +1,64 @@
-var async = require('async');
-var fs = require('fs');
-var path = require('path');
+
+const fs = require('fs');
+const path = require('path');
+const util = require('util');
+
+const rf = util.promisify(fs.readFile);
+const wf = util.promisify(fs.writeFile);
 
 // File paths
-var EMOJI_PATH = path.resolve(__dirname, 'Emoji_Sentiment_Data_v1.0.csv');
-var RESULT_PATH = path.resolve(__dirname, 'emoji.json');
+const EMOJI_PATH = path.join(__dirname, 'Emoji_Sentiment_Data_v1.0.csv');
+const RESULT_PATH = path.join(__dirname, 'emoji.json');
 
 /**
  * Read emoji data from original format (CSV).
- * @param  {object}   hash     Result hash
- * @param  {Function} callback Callback
- * @return {void}
+ * 
+ * @return {{ [index: string]: number }}
  */
-function processEmoji(hash, callback) {
-    // Read file
-    fs.readFile(EMOJI_PATH, 'utf8', function (err, data) {
-        if (err) return callback(err);
-
-        // Split data by new line
-        data = data.split(/\n/);
-
+async function processEmoji() {
+    try {
+        const map = {};
+        const data = await rf(EMOJI_PATH, 'utf-8');
+        // Format:
+        // Emoji,Unicode codepoint,Occurrences,Position,Negative,Neutral,Positive,Unicode name,Unicode block
+        const lines = data.split(/\n/);
+        // Remove label
+        lines.shift();
         // Iterate over dataset and add to hash
-        for (var i in data) {
-            var line = data[i].split(',');
+        for (let line of lines) {
+            const values = line.split(',');
 
-            // Validate line
-            if (i == 0) continue;               // Label
-            if (line.length !== 9) continue;    // Invalid
+            if (values.length !== 9) continue;  // Invalid
 
             // Establish sentiment value
-            var emoji = String.fromCodePoint(line[1]);
-            var occurences = line[2];
-            var negCount = line[4];
-            var posCount = line[6];
-            var score = (posCount / occurences) - (negCount / occurences);
-            var sentiment = Math.floor(5 * score);
+            const emoji = String.fromCodePoint(values[1]);
+            const occurences = values[2];
+            const negCount = values[4];
+            const posCount = values[6];
+            const score = (posCount / occurences) - (negCount / occurences);
+            const sentiment = Math.floor(5 * score);
 
             // Validate score
             if (Number.isNaN(sentiment)) continue;
             if (sentiment === 0) continue;
 
             // Add to hash
-            hash[emoji] = sentiment;
+            map[emoji] = sentiment;
         }
-
-        callback(null, hash);
-    });
+        return map;
+    } catch (err) {
+        console.error('Error reading emoji file: ' + err);
+    }
 }
 
-/**
- * Write sentiment score hash to disk.
- * @param  {object}   hash     Result hash
- * @param  {Function} callback Callback
- * @return {void}
- */
-function finish(hash, callback) {
-    var result = JSON.stringify(hash, null, 4);
-    fs.writeFile(RESULT_PATH, result, function (err) {
-        if (err) return callback(err);
-        callback(null, hash);
-    });
-}
 
-// Execute build process
-async.waterfall([
-    function (cb) {
-        cb(null, {});
-    },
-    processEmoji,
-    finish
-], function(err, result) {
-    if (err) throw new Error(err);
-    process.stderr.write(
-        'Complete: ' +
-        Object.keys(result).length +
-        ' entries.\n'
-    );
-});
+void async function run() {
+    const data = await processEmoji();
+    const prettyJson = JSON.stringify(data, null, 4);
+    try {
+        await wf(RESULT_PATH, prettyJson);
+        console.info(`Complete: ${Object.keys(data).length} entries.`);
+    } catch(err) {
+        console.error('Error writing emoji file: ' + err);
+    }
+}().catch(console.error);

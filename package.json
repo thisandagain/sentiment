@@ -22,17 +22,16 @@
   "types": "./lib/src/index.d.ts",
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
-    "build:emoji": "node ./build/build.js",
+    "build:emoji": "node ./emoji/build.js",
     "build:types": "npm run build -- --declaration --outdir lib --emitDeclarationOnly",
     "documentation": "typedoc --out docs --exclude '*.json' ./src",
-    "test:lint": "eslint . --ext=js",
     "test:unit": "jest -c jest.config.unit.js",
     "test:integration": "jest -c jest.config.integration.js",
     "test:benchmark": "npm run build && node ./test/benchmark/performance.test.js",
     "test:validate": "npm run build && node ./test/benchmark/validate.test.js",
     "test:coverage": "tap './test/{integration,unit}/*.js' --coverage --coverage-report=lcov",
     "test:watch": "jest -c jest.config.unit.js --watch",
-    "test": "npm run test:lint && npm run test:unit && npm run test:integration && npm run test:benchmark && npm run test:validate"
+    "test": "npm run test:unit && npm run test:integration && npm run test:benchmark && npm run test:validate"
   },
   "publishConfig": {
     "access": "public"
@@ -46,11 +45,9 @@
     "@types/jest": "^24.0.13",
     "@types/node": "^12.0.2",
     "Sentimental": "1.0.1",
-    "async": "^2.1.5",
     "benchmark": "^2.1.4",
     "eslint": "^5.16.0",
     "jest": "^24.8.0",
-    "mock-require": "^3.0.1",
     "ts-jest": "^24.0.2",
     "typedoc": "^0.14.2",
     "typescript": "^3.4.5"
