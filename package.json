@@ -19,7 +19,7 @@
     "sentiment analysis"
   ],
   "main": "./lib/src/index.js",
-  "types": "",
+  "types": "./lib/src/index.d.ts",
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
     "build:emoji": "node ./build/build.js",
@@ -27,7 +27,7 @@
     "documentation": "typedoc --out docs --exclude '*.json' ./src",
     "test:lint": "eslint . --ext=js",
     "test:unit": "jest -c jest.config.unit.js",
-    "test:integration": "tap test/integration/*.js",
+    "test:integration": "jest -c jest.config.integration.js",
     "test:benchmark": "node ./test/benchmark/performance.js",
     "test:validate": "node ./test/benchmark/validate.js",
     "test:coverage": "tap './test/{integration,unit}/*.js' --coverage --coverage-report=lcov",
