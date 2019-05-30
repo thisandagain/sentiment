@@ -32,7 +32,6 @@ const defaultScoringStrategy: ScoringStrategy = (_tokens, _cursor, tokenScore) =
 function loadLanguage(languageCode: string): Language {
     const languagePath = join(__dirname, '..', 'languages', languageCode);
     const language: Language = require(languagePath).default;
-    console.warn(Object.keys(language));
     if (!language) {
         throw new Error('No language found: ' + languageCode);
     }
