@@ -30,8 +30,9 @@ const defaultScoringStrategy: ScoringStrategy = (_tokens, _cursor, tokenScore) =
  * @param {string} languageCode
  */
 function loadLanguage(languageCode: string): Language {
-    const languagePath = join(__dirname, '..', 'languages', languageCode, 'index');
-    const language: Language = require(languagePath);
+    const languagePath = join(__dirname, '..', 'languages', languageCode);
+    const language: Language = require(languagePath).default;
+    console.warn(Object.keys(language));
     if (!language) {
         throw new Error('No language found: ' + languageCode);
     }
@@ -71,15 +72,20 @@ export class LanguageProcessor {
         if (Object.keys(language.labels).length === 0) {
             throw new Error('language.labels must contain fields.');
         }
-        if(!language.scoringStrategy) {
-            language.scoringStrategy = defaultScoringStrategy;
+        Object.assign(language.labels, emojis);
+
+        if(language.scoringStrategy) {
+            this._languages[languageCode] = { 
+                labels: language.labels,
+                scoringStrategy: language.scoringStrategy
+            };
+        } else {
+            this._languages[languageCode] = { 
+                labels: language.labels,
+                scoringStrategy: defaultScoringStrategy
+            };
         }
 
-        Object.assign(language.labels, emojis);
-        this._languages[languageCode] = { 
-            labels: language!.labels,
-            scoringStrategy: language!.scoringStrategy
-        };
     }
 
     /**
