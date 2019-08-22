@@ -8,8 +8,8 @@ var result = sentiment.analyze(dataset);
 
 test('synchronous corpus', function (t) {
     t.type(result, 'object');
-    t.equal(result.score, -3);
-    t.equal(result.tokens.length, 1416);
-    t.equal(result.words.length, 73);
+    t.equal(result.score, -4);
+    t.equal(result.tokens.length, 1426);
+    t.equal(result.words.length, 74);
     t.end();
 });
