@@ -28,6 +28,16 @@ test('english', function (t) {
         tokenize('That\'ll cause problems for the farmer\'s pigs'),
         ['that\'ll', 'cause', 'problems', 'for', 'the', 'farmer\'s', 'pigs']
     );
+    t.deepEqual(
+        tokenize(' If you are    Razr owner...you must have this!  '),
+        ['if', 'you', 'are', 'razr', 'owner', 'you', 'must', 'have', 'this']
+    );
+    t.deepEqual(
+        // eslint-disable-next-line max-len
+        tokenize('Tied to charger for conversations lasting more than 45 minutes.MAJOR PROBLEMS!!'),
+        // eslint-disable-next-line max-len
+        ['tied', 'to', 'charger', 'for', 'conversations', 'lasting', 'more', 'than', '45', 'minutes', 'major', 'problems']
+    );
     t.end();
 });
 
