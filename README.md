@@ -131,8 +131,8 @@ That string results in the following:
 ```javascript
 {
     score: 1,
-    calculation: [ { allergic: -2 }, { love: 3 }],
     comparative: 0.1111111111111111,
+    calculation: [ { allergic: -2 }, { love: 3 } ],
     tokens: [
         'i',
         'love',
@@ -160,6 +160,7 @@ That string results in the following:
 * Returned Objects
     * __Score__: Score calculated by adding the sentiment values of recongnized words.
     * __Comparative__: Comparative score of the input string.
+    * __Calculation__: An array of words that have a negative or positive valence with their respective AFINN score.
     * __Token__: All the tokens like words or emojis found in the input string.
     * __Words__: List of words from input string that were found in AFINN list.
     * __Positive__: List of postive words in input string that were found in AFINN list.
