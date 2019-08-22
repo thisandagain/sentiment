@@ -123,7 +123,7 @@ console.dir(result);    // Score: 7, Comparative: 1.75
 
 ## How it works
 ### AFINN
-AFINN is a list of words rated for valence with an integer between minus five (negative) and plus five (positive). Sentiment analysis is performed by cross-checking the string tokens(words, emojis) with the AFINN list and getting their respective scores. The comparative score is simply: `sum of each token / number of tokens`. So for example let's take the following:
+AFINN is a list of words rated for valence with an integer between minus five (negative) and plus five (positive). Sentiment analysis is performed by cross-checking the string tokens (words, emojis) with the AFINN list and getting their respective scores. The comparative score is simply: `sum of each token / number of tokens`. So for example let's take the following:
 
 `I love cats, but I am allergic to them.`
 
@@ -157,11 +157,11 @@ That string results in the following:
 ```
 
 * Returned Objects
-    * __Score__: Score calculated by adding the sentiment values of recongnized words.
+    * __Score__: Score calculated by adding the sentiment values of recognized words.
     * __Comparative__: Comparative score of the input string.
     * __Token__: All the tokens like words or emojis found in the input string.
     * __Words__: List of words from input string that were found in AFINN list.
-    * __Positive__: List of postive words in input string that were found in AFINN list.
+    * __Positive__: List of positive words in input string that were found in AFINN list.
     * __Negative__: List of negative words in input string that were found in AFINN list.
 
 In this case, love has a value of 3, allergic has a value of -2, and the remaining tokens are neutral with a value of 0. Because the string has 9 tokens the resulting comparative score looks like:
