@@ -204,18 +204,11 @@ To run the validation tests yourself:
 npm run test:validate
 ```
 
-### Rand Accuracy (AFINN Only)
+### Rand Accuracy
 ```
-Amazon:  0.70
-IMDB:    0.76
-Yelp:    0.67
-```
-
-### Rand Accuracy (AFINN + Additions)
-```
-Amazon:  0.72 (+2%)
-IMDB:    0.76 (+0%)
-Yelp:    0.69 (+2%)
+Amazon:  0.726
+IMDB:    0.765
+Yelp:    0.696
 ```
 
 ---
