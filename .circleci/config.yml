@@ -1,8 +1,6 @@
-# Javascript Node CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-javascript/ for more details
-#
-version: 2
+version: 2.1
+orbs:
+  codecov: codecov/codecov@1.0.2
 jobs:
   build:
     docker:
@@ -28,7 +26,7 @@ jobs:
 
       # NPM install
       - run:
-          name: install
+          name: Install
           command: npm install
 
       # Save cache
@@ -39,13 +37,16 @@ jobs:
 
       # Run tests
       - run:
-          name: test
+          name: Tests
           command: npm test
 
       # Generate coverage report
       - run:
-          name: coverage
+          name: Code Coverage
           command: npm run test:coverage
 
       - store_artifacts:
           path: coverage
+
+      - codecov/upload:
+          file: coverage
