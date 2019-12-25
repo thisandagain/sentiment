@@ -2,9 +2,7 @@
 ### AFINN-based sentiment analysis for Node.js
 
 [![CircleCI](https://circleci.com/gh/thisandagain/sentiment.svg?style=svg)](https://circleci.com/gh/thisandagain/sentiment)
-
 [![codecov](https://codecov.io/gh/thisandagain/sentiment/branch/develop/graph/badge.svg)](https://codecov.io/gh/thisandagain/sentiment)
-
 [![Greenkeeper badge](https://badges.greenkeeper.io/thisandagain/sentiment.svg)](https://greenkeeper.io/)
 
 Sentiment is a Node.js module that uses the [AFINN-165](http://www2.imm.dtu.dk/pubdb/views/publication_details.php?id=6010) wordlist and [Emoji Sentiment Ranking](http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0144296) to perform [sentiment analysis](http://en.wikipedia.org/wiki/Sentiment_analysis) on arbitrary blocks of input text. Sentiment provides several things:
