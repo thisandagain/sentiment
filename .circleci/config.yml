@@ -49,4 +49,4 @@ jobs:
           path: coverage
 
       - codecov/upload:
-          file: coverage
+          file: ./coverage/lcov.info
