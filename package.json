@@ -23,13 +23,14 @@
     "test:integration": "tap test/integration/*.js",
     "test:benchmark": "node ./test/benchmark/performance.js",
     "test:validate": "node ./test/benchmark/validate.js",
-    "test:coverage": "tap './test/{integration,unit}/*.js' --coverage --coverage-report=lcov",
+    "test:coverage": "tap './test/{integration,unit}/*.js' --coverage --coverage-report=lcov | codecov",
     "test": "npm run test:lint && npm run test:unit && npm run test:integration && npm run test:benchmark && npm run test:validate"
   },
   "devDependencies": {
     "Sentimental": "1.0.1",
     "async": "^3.1.0",
     "benchmark": "^2.1.0",
+    "codecov": "^3.6.1",
     "eslint": "^6.8.0",
     "mock-require": "^3.0.3",
     "tap": "^14.10.5"
